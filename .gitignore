@@ -1,0 +1,4 @@
+# Ignore emacs autosave information
+auto-save-list/*
+# Ignore compiled elisp files
+*.elc
