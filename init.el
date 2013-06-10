@@ -59,6 +59,14 @@
      "puppet-mode")
    ))
 
+;; Require other modes
+(require 'dcpu16-mode)
+(require 'puppet-mode)
+
+;;
+;; Package Management
+;;
+
 ;; Add other repositories to the package manager
 (require 'package)
 (add-to-list
@@ -66,9 +74,18 @@
  '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
 
-;; Require other modes
-(require 'dcpu16-mode)
-(require 'puppet-mode)
+;; Which package to make sure are installed
+(setq keep-installed '(magit paredit))
+
+;; If any of `keep-installed` are not installed, install them
+
+(mapc
+ (lambda (package)
+   (or (package-installed-p package)
+       (if (y-or-n-p (format "Package %s is missing. Install it?" package))
+	   (package-install package))))
+ keep-installed)
+
 
 ;; Mode Mappings
 (require 'mode-mappings)
