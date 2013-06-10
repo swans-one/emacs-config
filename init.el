@@ -17,6 +17,9 @@
 (require 'dcpu16-mode)
 (require 'puppet-mode)
 
+;; Mode Mappings
+(require 'mode-mappings)
+
 ;;
 ;; Simple Customizations
 ;;
