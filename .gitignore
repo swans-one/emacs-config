@@ -2,3 +2,7 @@
 auto-save-list/*
 # Ignore compiled elisp files
 *.elc
+# Ignore packages installed from elpa/marmalade/etc.
+#    This assumes that which packages are installed are documented
+#    elsewhere in my .emacs.d, which they will be.
+elpa/*

@@ -17,7 +17,6 @@
 (require 'ido)
 (ido-mode t)
 
-
 ;; Remove Tool Bar if graphical, menu bar otherwise
 (if (display-graphic-p)
     (tool-bar-mode 0)
@@ -59,6 +58,13 @@
    '("dcpu16-mode" 
      "puppet-mode")
    ))
+
+;; Add other repositories to the package manager
+(require 'package)
+(add-to-list
+ 'package-archives
+ '("marmalade" . "http://marmalade-repo.org/packages/"))
+(package-initialize)
 
 ;; Require other modes
 (require 'dcpu16-mode)
