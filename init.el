@@ -64,12 +64,17 @@
 (let ((default-directory site-lisp-dir))
   (normal-top-level-add-to-load-path
    '("dcpu16-mode" 
-     "puppet-mode")
+     "puppet-mode"
+     "ESS")
    ))
 
 ;; Require other modes
 (require 'dcpu16-mode)
 (require 'puppet-mode)
+
+;; ESS
+(add-to-list 'load-path (expand-file-name "ESS/lisp" site-lisp-dir))
+(require 'ess-site)
 
 ;;
 ;; Package Management
@@ -94,7 +99,8 @@
 	   (package-install package))))
  keep-installed)
 
-
+;;
 ;; Mode Mappings
+;;
 (require 'mode-mappings)
-
+(require 'keybindings)
