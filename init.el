@@ -65,12 +65,14 @@
   (normal-top-level-add-to-load-path
    '("dcpu16-mode" 
      "puppet-mode"
+     "markdown-mode"
      "ESS")
    ))
 
 ;; Require other modes
 (require 'dcpu16-mode)
 (require 'puppet-mode)
+(require 'markdown-mode)
 
 ;; ESS
 (add-to-list 'load-path (expand-file-name "ESS/lisp" site-lisp-dir))
