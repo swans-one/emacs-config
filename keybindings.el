@@ -9,6 +9,9 @@
 (global-set-key (kbd "C-x C-g") 'magit-status)
 
 ;; Insert a dollar sign pair
-(global-set-key (kbd "C-c 4") 'insert-dollar-pair)
+(global-set-key (kbd "C-c C-d") 'insert-dollar-pair)
+
+;; Enter into LaTeX display-math  mode
+(global-set-key (kbd "C-c D") 'enter-display-math)
 
 (provide 'keybindings)
