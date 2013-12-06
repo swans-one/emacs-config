@@ -23,5 +23,7 @@ inside of it."
   (backward-char 8)
 )
 
+;;What file am I looking at.
+(defun what-file () (interactive) (message (buffer-file-name)))
 
 (provide 'defuns)
