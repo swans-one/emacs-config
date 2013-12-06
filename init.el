@@ -29,7 +29,7 @@
 (transient-mark-mode t)
 
 ;; NEVER EVER USE TABS
-(setq indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil)
 
 ;; Save all autosave files in a backups directory
 (defvar user-temporary-file-directory 
