@@ -16,6 +16,8 @@
 ;; Ido Mode:
 (require 'ido)
 (ido-mode t)
+;; Remove backwards searching in path for file
+(setq ido-auto-merge-work-directories-length -1)
 
 ;; Remove Tool Bar if graphical, menu bar otherwise
 (if (display-graphic-p)
