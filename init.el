@@ -49,6 +49,13 @@
      (when (not window-system)
        (set-face-background 'magit-item-highlight "black"))))
 
+;; Better unique names for similarly named buffers
+;;
+;; post-forward mode adds additional path information after a | after
+;; the filenames of similarly named files.
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'post-forward)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;         Loading Other Elisp          ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
