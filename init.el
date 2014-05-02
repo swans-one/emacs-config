@@ -30,6 +30,9 @@
 ;; Transient Mark Mode
 (transient-mark-mode t)
 
+;; show column number in mode line
+(setq column-number-mode t)
+
 ;; NEVER EVER USE TABS
 (setq-default indent-tabs-mode nil)
 
