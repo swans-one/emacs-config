@@ -59,6 +59,9 @@
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'post-forward)
 
+;; Use pdflatex to compile LaTeX files
+(setq latex-run-command "pdflatex")
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;         Loading Other Elisp          ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
