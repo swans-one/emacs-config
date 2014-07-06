@@ -14,4 +14,11 @@
 ;; Enter into LaTeX display-math  mode
 (global-set-key (kbd "C-c D") 'enter-display-math)
 
+;; Hooks for html mode keybindings
+(defun erik-html-mode-keys ()
+  "Modify keymaps used by `html-mode'."
+  (local-set-key (kbd "C-c C-z") 'insert-new-django-block)
+)
+(add-hook 'html-mode-hook 'erik-html-mode-keys)
+
 (provide 'keybindings)

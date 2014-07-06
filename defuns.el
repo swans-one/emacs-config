@@ -26,4 +26,13 @@ inside of it."
 ;;What file am I looking at.
 (defun what-file () (interactive) (message (buffer-file-name)))
 
+;; Django Template function
+(defun insert-new-django-block ()
+  "Insert a new block statement, move point to block name."
+  (interactive)
+  (insert "{% block %}{% endblock %}")
+  (backward-char 16)
+)
+
+
 (provide 'defuns)
