@@ -23,7 +23,7 @@ inside of it."
   (backward-char 8)
 )
 
-;;What file am I looking at.
+;; What file am I looking at.
 (defun what-file () (interactive) (message (buffer-file-name)))
 
 ;; Django Template function
@@ -34,5 +34,19 @@ inside of it."
   (backward-char 16)
 )
 
+;; Wrap a single line.
+(defun wrap-line ()
+  "Wrap a line to 72 characters or less"
+  (interactive)
+  (move-to-column 72)
+  (if (and (not (equal (char-after) " "))
+           (not (equal (char-before) " ")))
+      (backward-word))
+  (backward-word)
+  (forward-word)
+  (insert "\n")
+  (funcall indent-line-function)
+  (end-of-line)
+)
 
 (provide 'defuns)
