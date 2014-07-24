@@ -21,4 +21,8 @@
 )
 (add-hook 'html-mode-hook 'erik-html-mode-keys)
 
+;; Wrapping a single line
+(global-set-key (kbd "C-x ,") 'wrap-line)
+(global-set-key (kbd "C-x i") 'wrap-line-indent)
+
 (provide 'keybindings)
