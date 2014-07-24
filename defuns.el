@@ -48,5 +48,13 @@ inside of it."
   (funcall indent-line-function)
   (end-of-line)
 )
+(defun wrap-line-indent ()
+  "Wrap a line to 72 characters than indent it by four."
+  (interactive)
+  (wrap-line)
+  (back-to-indentation)
+  (insert "    ")
+  (end-of-line)
+)
 
 (provide 'defuns)
