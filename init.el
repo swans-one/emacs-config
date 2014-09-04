@@ -140,3 +140,4 @@
  ;; If there is more than one, they won't work right.
  '(rst-level-1 ((t (:background "black"))))
  '(rst-level-2 ((t (:background "color-17")))))
+(put 'upcase-region 'disabled nil)
