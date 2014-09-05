@@ -83,8 +83,7 @@
   (normal-top-level-add-to-load-path
    '("dcpu16-mode" 
      "puppet-mode"
-     "markdown-mode"
-     "ESS")
+     "markdown-mode")
    ))
 
 ;; Require other modes
@@ -93,6 +92,10 @@
 (require 'markdown-mode)
 
 ;; ESS
+; If this fails install ESS:
+;     cd && mkdir .ESS && cd .ESS
+;     git clone git://github.com/emacs-ess/ESS.git && cd ESS && make all
+(load "~/.ESS/ESS/lisp/ess-site")
 
 ;;
 ;; Package Management
