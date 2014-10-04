@@ -25,4 +25,7 @@
 (global-set-key (kbd "C-x ,") 'wrap-line)
 (global-set-key (kbd "C-x i") 'wrap-line-indent)
 
+;; Execute a commented region
+(global-set-key (kbd "C-M-c") 'run-commented)
+
 (provide 'keybindings)

@@ -57,4 +57,16 @@ inside of it."
   (end-of-line)
 )
 
+;; Run-commented
+(defun run-commented ()
+  "Uncommnet, run, recomment a paragraph"
+  (interactive)
+  (mark-paragraph)
+  (exchange-point-and-mark)
+  (backward-char)
+  (uncomment-region (region-beginning) (region-end))
+  (call-interactively (key-binding (kbd "C-M-x")))
+  (comment-region (region-beginning) (region-end))
+)
+
 (provide 'defuns)
