@@ -28,4 +28,8 @@
 ;; Execute a commented region
 (global-set-key (kbd "C-M-c") 'run-commented)
 
+;; Underline a line
+(global-set-key (kbd "C-c u") 'underline-line)
+(global-set-key (kbd "C-c C-u") 'underline-line)
+
 (provide 'keybindings)

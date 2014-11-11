@@ -69,4 +69,36 @@ inside of it."
   (comment-region (region-beginning) (region-end))
 )
 
+;; Underlining
+(setq underline-char-sequence '(?= ?- ?~ ?`))
+
+(defun underline-char (char)
+  "Return the next appropriate character in the underline sequence"
+  (let ((next-underline (member char underline-char-sequence)))
+    (if (and next-underline (nth 1 next-underline))
+        (nth 1 next-underline)
+      (car underline-char-sequence))))
+
+(defun already-underlined (cur-under-char)
+  "Take the first character and determine if it's an underline"
+  (if (member cur-under-char underline-char-sequence)
+      t
+    nil))
+
+(defun underline-line ()
+  ""
+  (interactive)
+  (end-of-line)
+  (let* ((cur-under-char (char-after (+ (point) 1)))
+         (next-under-char (underline-char cur-under-char))
+         (column (current-column))
+         (line-already-underlined (already-underlined cur-under-char)))
+    (if line-already-underlined
+        (progn (forward-char)
+            (delete-region (point) (line-end-position)))
+      (insert-char ?\n))
+    (insert-char next-under-char column))
+  (beginning-of-line)
+  (forward-line -1))
+
 (provide 'defuns)
