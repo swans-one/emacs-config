@@ -25,7 +25,11 @@
   (menu-bar-mode 0))
 
 ;; Visible Bell instead of Audible bell
-(setq visible-bell 1)
+(defun my-terminal-visible-bell ()
+   "A friendlier visual bell effect."
+   (invert-face 'mode-line)
+   (run-with-timer 0.1 nil 'invert-face 'mode-line))
+(setq visible-bell nil ring-bell-function 'my-terminal-visible-bell)
 
 ;; Transient Mark Mode
 (transient-mark-mode t)
