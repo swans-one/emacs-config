@@ -66,6 +66,9 @@
 ;; Use pdflatex to compile LaTeX files
 (setq latex-run-command "pdflatex")
 
+;; Custom options for `C-u M-x ps-print-buffer-with-faces`
+(setq ps-print-header nil)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;         Loading Other Elisp          ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
