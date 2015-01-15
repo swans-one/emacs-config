@@ -101,4 +101,12 @@ inside of it."
   (beginning-of-line)
   (forward-line -1))
 
+;; Pbcopy function
+
+(defun pbcopy ()
+  "Copy to the osx clipboard"
+  (interactive)
+  (shell-command-on-region
+   (region-beginning) (region-end) "pbcopy"))
+
 (provide 'defuns)
