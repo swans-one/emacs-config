@@ -32,4 +32,7 @@
 (global-set-key (kbd "C-c u") 'underline-line)
 (global-set-key (kbd "C-c C-u") 'underline-line)
 
+;; Unfill paragraph
+(global-set-key (kbd "M-Q") 'unfill-paragraph)
+
 (provide 'keybindings)

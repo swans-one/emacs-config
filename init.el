@@ -69,6 +69,11 @@
 ;; Custom options for `C-u M-x ps-print-buffer-with-faces`
 (setq ps-print-header nil)
 
+;; C-mode customizations
+(setq-default c-default-style "linux"
+              c-basic-offset 4)
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;         Loading Other Elisp          ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -138,12 +143,13 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(haskell-mode-hook (quote (turn-on-haskell-indent))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(magit-item-highlight ((t nil)))
  '(rst-level-1 ((t (:background "black"))))
  '(rst-level-2 ((t (:background "color-17")))))
 (put 'upcase-region 'disabled nil)
