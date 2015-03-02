@@ -35,4 +35,7 @@
 ;; Unfill paragraph
 (global-set-key (kbd "M-Q") 'unfill-paragraph)
 
+;; Compile with ./build.sh
+(global-set-key (kbd "C-c b") 'compile-build-sh)
+
 (provide 'keybindings)

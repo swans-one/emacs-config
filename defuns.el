@@ -118,6 +118,10 @@ inside of it."
             (emacs-lisp-docstring-fill-column t))
         (fill-paragraph nil region)))
 
+;; Compile with ./build.sh
+(defun compile-build-sh ()
+  (interactive)
+  (compile "./build.sh"))
 
 
 (provide 'defuns)
