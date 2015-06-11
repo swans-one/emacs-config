@@ -38,4 +38,7 @@
 ;; Compile with ./build.sh
 (global-set-key (kbd "C-c b") 'compile-build-sh)
 
+;; Make an echoing shell behave correctly
+(global-set-key (kbd "C-c e") 'shell-echoes)
+
 (provide 'keybindings)

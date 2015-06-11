@@ -124,4 +124,10 @@ inside of it."
   (compile "./build.sh"))
 
 
+;; Make an echoing shell behave correctly
+(defun shell-echoes ()
+  (interactive)
+  (setq comint-process-echoes t))
+
+
 (provide 'defuns)
