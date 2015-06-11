@@ -73,6 +73,9 @@
 (setq-default c-default-style "linux"
               c-basic-offset 4)
 
+;; Use subword mode everywhere. Makes camelCase into separate words.
+(global-subword-mode 1)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;         Loading Other Elisp          ;;
@@ -151,5 +154,6 @@
  ;; If there is more than one, they won't work right.
  '(magit-item-highlight ((t nil)))
  '(rst-level-1 ((t (:background "black"))))
- '(rst-level-2 ((t (:background "color-17")))))
+ '(rst-level-2 ((t (:background "color-17"))))
+ '(rst-level-3 ((t nil))))
 (put 'upcase-region 'disabled nil)
