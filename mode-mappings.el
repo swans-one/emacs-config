@@ -9,4 +9,7 @@
 (add-to-list 'auto-mode-alist '("\\.mkdn$" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.mkd$" . markdown-mode))
 
+;; octave mode
+(add-to-list 'auto-mode-alist '("\\.m$" . octave-mode))
+
 (provide 'mode-mappings)
