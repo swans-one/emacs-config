@@ -34,6 +34,16 @@ inside of it."
   (backward-char 16)
 )
 
+;; Python what-class
+(defun python-what-class ()
+  (interactive)
+  (save-excursion
+    (search-backward "class")
+    (forward-char)
+    (message (thing-at-point 'line))
+))
+
+
 ;; Wrap a single line.
 (defun wrap-line ()
   "Wrap a line to 72 characters or less"
@@ -102,7 +112,6 @@ inside of it."
   (forward-line -1))
 
 ;; Pbcopy function
-
 (defun pbcopy ()
   "Copy to the osx clipboard"
   (interactive)
