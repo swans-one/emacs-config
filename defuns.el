@@ -40,7 +40,9 @@ inside of it."
   (save-excursion
     (search-backward "class")
     (forward-char)
-    (message (thing-at-point 'line))
+    (message (replace-regexp-in-string
+              "\n$" ""
+              (thing-at-point 'line)))
 ))
 
 

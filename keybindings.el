@@ -51,7 +51,7 @@
   "Modify kymaps used by `python-mode'."
   (local-set-key (kbd "C-c C-w") 'python-what-class)
 )
-(add-hook 'html-mode-hook 'erik-python-mode-keys)
+(add-hook 'python-mode-hook 'erik-python-mode-keys)
 
 
 (provide 'keybindings)
