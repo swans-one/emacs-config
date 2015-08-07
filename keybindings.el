@@ -34,6 +34,8 @@
 ;; Make an echoing shell behave correctly
 (global-set-key (kbd "C-c e") 'shell-echoes)
 
+;; unpop-to-mark
+(global-set-key (kbd "C-x C-p") 'unpop-to-mark-command)
 
 ;;
 ;; Mode Specific Keybindings
