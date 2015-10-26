@@ -1,0 +1,5 @@
+# contributor: Erik Swanson <theerikswanson@gmail.com>
+# name: assertEqual
+# key: ae
+# --
+self.assertEqual(${1:result}, ${2:expected})

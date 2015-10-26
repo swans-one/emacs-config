@@ -1,0 +1,8 @@
+# contributor: Erik Swanson <theerikswanson@gmail.com>
+# name: privateMethod
+# key: mdp
+# --
+def _$1(self$2):
+    """$3
+    """
+    ${0:pass}

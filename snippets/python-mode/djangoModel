@@ -1,0 +1,8 @@
+# contributor: Erik Swanson <theerikswanson@gmail.com>
+# name: djangoModel
+# key: model
+# --
+class $1(models.Model):
+    """$2
+    """
+    $0

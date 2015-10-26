@@ -1,4 +1,4 @@
-;; This file is broken up into two sections. 
+;; This file is broken up into two sections.
 ;;
 ;; The first section contains simple customizations, which make sense
 ;; to include in this init file. These are customizations that I want
@@ -41,7 +41,7 @@
 (setq-default indent-tabs-mode nil)
 
 ;; Save all autosave files in a backups directory
-(defvar user-temporary-file-directory 
+(defvar user-temporary-file-directory
 "~/.emacs-backup")
 (setq backup-directory-alist
       `((".*" . ,user-temporary-file-directory)))
@@ -96,15 +96,18 @@
 ;; load-path.
 (let ((default-directory site-lisp-dir))
   (normal-top-level-add-to-load-path
-   '("dcpu16-mode" 
+   '("dcpu16-mode"
      "puppet-mode"
-     "markdown-mode")
+     "markdown-mode"
+     "rainbow-delimiters")
    ))
+
 
 ;; Require other modes
 (require 'dcpu16-mode)
 (require 'puppet-mode)
 (require 'markdown-mode)
+(require 'rainbow-delimiters)
 
 ;; ESS
 ; If this fails install ESS:
@@ -124,7 +127,7 @@
 (package-initialize)
 
 ;; Which package to make sure are installed
-(setq keep-installed '(magit paredit))
+(setq keep-installed '(magit paredit yasnippet geiser quack))
 
 ;; If any of `keep-installed` are not installed, install them
 
@@ -135,24 +138,53 @@
 	   (package-install package))))
  keep-installed)
 
+
+;; YaSnippet
+(require 'yasnippet)
+(setq yas-snippetdirs
+      '("~/.emacs.d/snippets"))
+(yas-global-mode 1)
+(setq yas-prompt-functions '(yas-ido-prompt))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;         Mode Specific Hooks          ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(add-hook 'scheme-mode-hook 'show-paren-mode)
+(add-hook 'scheme-mode-hook 'paredit-mode)
+;; (add-hook 'scheme-mode-hook 'rainbow-delimiters-mode)
+
+(add-hook 'emacs-lisp-mode 'show-paren-mode)
+(add-hook 'emacs-lisp-mode 'paredit-mode)
+
+
+
 ;;
 ;; Mode Mappings
 ;;
 (require 'mode-mappings)
 (require 'keybindings)
+
 (put 'downcase-region 'disabled nil)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(haskell-mode-hook (quote (turn-on-haskell-indent))))
+ '(haskell-mode-hook (quote (turn-on-haskell-indent)))
+ '(rainbow-delimiters-max-face-count 4)
+ '(rainbow-delimiters-outermost-only-face-count 1))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(magit-item-highlight ((t nil)))
+ '(rainbow-delimiters-depth-1-face ((t (:foreground "green"))))
+ '(rainbow-delimiters-depth-2-face ((t (:foreground "yellow"))))
+ '(rainbow-delimiters-depth-3-face ((t (:foreground "magenta"))))
+ '(rainbow-delimiters-depth-4-face ((t (:foreground "blue"))))
  '(rst-level-1 ((t (:background "black"))))
  '(rst-level-2 ((t (:background "color-17"))))
  '(rst-level-3 ((t nil))))

@@ -1,0 +1,10 @@
+# contributor: Erik Swanson <theerikswanson@gmail.com>
+# name: djangoTest
+# key: djtest
+# --
+class $1Test(TestCase):
+    def setUp(self):
+        pass
+
+    def test_$2(self):
+        pass

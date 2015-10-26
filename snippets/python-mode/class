@@ -1,0 +1,12 @@
+# contributor: Erik Swanson <theerikswanson@gmail.com>
+# name: class
+# key: cls
+# --
+class $1(object):
+    """$2
+    """
+    def __init__(self, $3):
+        """
+        ${3:$(python-args-to-rst-docstring)}
+        """
+        ${3:$(python-args-to-set-self)}

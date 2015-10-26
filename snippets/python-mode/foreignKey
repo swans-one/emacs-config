@@ -1,0 +1,6 @@
+# contributor: Erik Swanson <theerikswanson@gmail.com>
+# name: foreignKey
+# key: fk
+# --
+$1 = models.ForeignKey('${1:$(snake-to-camel yas-text)}')
+$0

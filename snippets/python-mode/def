@@ -1,0 +1,12 @@
+# contributor: Erik Swanson <theerikswanson@gmail.com>
+# name: function
+# key: def
+# --
+def $1($2):
+    """$3
+
+    ${2:$(python-args-to-rst-docstring)}
+    :rtype:
+    :returns:
+    """
+    ${0:pass}

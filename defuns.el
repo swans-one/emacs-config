@@ -38,7 +38,7 @@ inside of it."
 (defun python-what-class ()
   (interactive)
   (save-excursion
-    (search-backward "class")
+    (search-backward "\nclass")
     (forward-char)
     (message (replace-regexp-in-string
               "\n$" ""
