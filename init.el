@@ -65,6 +65,11 @@
 
 ;; Use pdflatex to compile LaTeX files
 (setq latex-run-command "pdflatex")
+(setenv "PATH" (concat
+                "/usr/texbin" ":"
+                "/usr/local/bin" ":"
+                "/usr/local/sbin" ":"
+                (getenv "PATH")))
 
 ;; Custom options for `C-u M-x ps-print-buffer-with-faces`
 (setq ps-print-header nil)
@@ -108,6 +113,7 @@
 (require 'puppet-mode)
 (require 'markdown-mode)
 (require 'rainbow-delimiters)
+(require 'expand-region)
 
 ;; ESS
 ; If this fails install ESS:
@@ -127,7 +133,7 @@
 (package-initialize)
 
 ;; Which package to make sure are installed
-(setq keep-installed '(magit paredit yasnippet geiser quack))
+(setq keep-installed '(magit paredit yasnippet geiser quack expand-region))
 
 ;; If any of `keep-installed` are not installed, install them
 

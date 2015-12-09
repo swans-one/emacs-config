@@ -37,6 +37,9 @@
 ;; unpop-to-mark
 (global-set-key (kbd "C-x C-p") 'unpop-to-mark-command)
 
+;; expand-region
+(global-set-key (kbd "C-]") 'er/expand-region)
+
 ;;
 ;; Mode Specific Keybindings
 ;;
