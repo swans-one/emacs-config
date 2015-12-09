@@ -113,7 +113,6 @@
 (require 'puppet-mode)
 (require 'markdown-mode)
 (require 'rainbow-delimiters)
-(require 'expand-region)
 
 ;; ESS
 ; If this fails install ESS:
