@@ -91,7 +91,6 @@
       (expand-file-name "site-lisp" user-emacs-directory))
 
 ;; Set up load path
-(add-to-list 'load-path user-emacs-directory)
 (add-to-list 'load-path site-lisp-dir)
 
 ;; IMPORTANT: import all my defuns
@@ -126,9 +125,12 @@
 
 ;; Add other repositories to the package manager
 (require 'package)
-(add-to-list
- 'package-archives
- '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives
+             '("org" . "http://orgmode.org/elpa/"))
+(add-to-list 'package-archives
+             '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
 
 ;; Which package to make sure are installed
@@ -152,6 +154,25 @@
 (setq yas-prompt-functions '(yas-ido-prompt))
 
 
+;; Web Mode / JSX mode
+(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+
+(add-to-list 'auto-mode-alist '("\\.js[x]?\\'" . web-mode))
+
+(setq web-mode-content-types-alist
+      '(("jsx" . "\\.js[x]?\\'")))
+
+
+;; Load Themes
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+(load-theme 'ample-zen t)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;         Mode Specific Hooks          ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -171,26 +192,17 @@
 (require 'mode-mappings)
 (require 'keybindings)
 
-(put 'downcase-region 'disabled nil)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(haskell-mode-hook (quote (turn-on-haskell-indent)))
- '(rainbow-delimiters-max-face-count 4)
- '(rainbow-delimiters-outermost-only-face-count 1))
+ '(custom-safe-themes
+   (quote
+    ("9494d6d64290602054292f7c1b2db4285b3fea4fbf63b54bdac21aa6f6b0a7e6" "f897f31a459baa86363c91ab0d98d184e41d42fd2c33ec39e72561f25bd8138b" default))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(magit-item-highlight ((t nil)))
- '(rainbow-delimiters-depth-1-face ((t (:foreground "green"))))
- '(rainbow-delimiters-depth-2-face ((t (:foreground "yellow"))))
- '(rainbow-delimiters-depth-3-face ((t (:foreground "magenta"))))
- '(rainbow-delimiters-depth-4-face ((t (:foreground "blue"))))
- '(rst-level-1 ((t (:background "black"))))
- '(rst-level-2 ((t (:background "color-17"))))
- '(rst-level-3 ((t nil))))
-(put 'upcase-region 'disabled nil)
+ )

@@ -1,0 +1,5 @@
+# contributor: Erik Swanson <theerikswanson@gmail.com>
+# name: print
+# key: p
+# --
+print($0)
