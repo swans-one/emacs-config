@@ -24,6 +24,9 @@
     (tool-bar-mode 0)
   (menu-bar-mode 0))
 
+;; Don't show the scrollbar
+(scroll-bar-mode -1)
+
 ;; Visible Bell instead of Audible bell
 (defun my-terminal-visible-bell ()
    "A friendlier visual bell effect."
@@ -48,13 +51,6 @@
 (setq auto-save-file-name-transforms
       `((".*" ,user-temporary-file-directory t)))
 
-;; Change magit's colors to something sensible
-(eval-after-load 'magit
-  '(progn
-     (set-face-foreground 'magit-diff-add "green3")
-     (set-face-foreground 'magit-diff-del "red")
-     (when (not window-system)
-       (set-face-background 'magit-item-highlight "black"))))
 
 ;; Better unique names for similarly named buffers
 ;;
@@ -148,13 +144,14 @@
 
 ;; YaSnippet
 (require 'yasnippet)
-(setq yas-snippetdirs
-      '("~/.emacs.d/snippets"))
+(with-eval-after-load 'yasnippet
+    (setq yas-snippet-dirs '("~/.emacs.d/snippets")))
 (yas-global-mode 1)
 (setq yas-prompt-functions '(yas-ido-prompt))
 
 
 ;; Web Mode / JSX mode
+;;;;;;;;;;;;;;;;;;;;;;
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
@@ -168,6 +165,10 @@
 (setq web-mode-content-types-alist
       '(("jsx" . "\\.js[x]?\\'")))
 
+; auto close html elements on >
+(setq web-mode-enable-auto-closing t)
+(setq web-mode-enable-auto-pairing t)
+(setq web-mode-auto-close-style 2)
 
 ;; Load Themes
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
