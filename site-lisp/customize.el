@@ -4,6 +4,7 @@
   (menu-bar-mode 0))
 (scroll-bar-mode -1)
 (setq column-number-mode t)
+(setq inhibit-startup-message t)
 
 ;; Editing improvements: transient-mark, tabs, subword mode
 (transient-mark-mode t)
