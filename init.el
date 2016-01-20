@@ -77,6 +77,10 @@
 ;; Use subword mode everywhere. Makes camelCase into separate words.
 (global-subword-mode 1)
 
+;; Org Mode Customizations
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+(global-set-key (kbd "C-c c") 'org-capture)
+(setq org-default-notes-file "~/captured-notes.org")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;         Loading Other Elisp          ;;
