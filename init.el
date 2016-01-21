@@ -61,6 +61,7 @@
 (require 'keybindings)
 (require 'mode-mappings)
 (require 'hooks)
+(require 'cust-org)
 
 
 (custom-set-variables

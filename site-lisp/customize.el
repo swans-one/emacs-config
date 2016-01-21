@@ -20,7 +20,7 @@
 
 ;; Save all autosave files in a backups directory
 (defvar user-temporary-file-directory
-"~/.emacs-backup")
+  "~/.emacs-backup")
 (setq backup-directory-alist
       `((".*" . ,user-temporary-file-directory)))
 (setq auto-save-file-name-transforms
@@ -46,6 +46,8 @@
 ;;;;;;;;;;;
 
 (require 'ido)
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
 (ido-mode t)
 (setq ido-auto-merge-work-directories-length -1) ;; don't backwards search for files
 (require 'uniquify)
@@ -57,13 +59,6 @@
 
 (setq-default c-default-style "linux"
               c-basic-offset 4)
-
-
-;; Org Mode Customizations
-;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(global-set-key (kbd "C-c c") 'org-capture)
-(setq org-default-notes-file "~/captured-notes.org")
 
 
 ;; YaSnippet
