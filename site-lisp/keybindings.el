@@ -40,6 +40,9 @@
 ;; expand-region
 (global-set-key (kbd "C-]") 'er/expand-region)
 
+;; collapse-line-back
+(global-set-key (kbd "<C-M-backspace>") 'collapse-line-back)
+
 ;;
 ;; Mode Specific Keybindings
 ;;

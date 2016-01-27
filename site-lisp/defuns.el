@@ -152,4 +152,14 @@ inside of it."
     (goto-char (marker-position (car (last mark-ring))))))
 
 
+(defun collapse-line-back ()
+  (interactive)
+  (back-to-indentation)
+  (push-mark)
+  (beginning-of-line)
+  (backward-char 1)
+  (delete-region (region-beginning) (region-end))
+  (insert " "))
+
+
 (provide 'defuns)
