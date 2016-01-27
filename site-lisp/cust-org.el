@@ -33,6 +33,11 @@
   (find-file org-default-notes-file))
 (global-set-key (kbd "C-c t") 'my/open-default-notes-file)
 
+(defun my/open-all-agenda-files ()
+  (interactive)
+  (mapcar 'find-file org-agenda-files))
+(global-set-key (kbd "C-c C-c t") 'my/open-all-agenda-files)
+
 ;; Capture Templates
 ;;   - task
 ;;   - email

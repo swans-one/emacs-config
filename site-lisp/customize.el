@@ -41,6 +41,8 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (load-theme 'ample-zen t)
 
+;; Set exec-path to find homebrew binaries
+(setq exec-path (append exec-path '("/usr/local/bin")))
 
 ;; Ido Mode
 ;;;;;;;;;;;
