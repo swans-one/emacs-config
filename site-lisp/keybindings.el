@@ -43,6 +43,9 @@
 ;; collapse-line-back
 (global-set-key (kbd "<C-M-backspace>") 'collapse-line-back)
 
+;; toggle-theme
+(global-set-key (kbd "C-x C-h") 'toggle-theme)
+
 ;;
 ;; Mode Specific Keybindings
 ;;

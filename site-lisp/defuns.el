@@ -162,4 +162,16 @@ inside of it."
   (insert " "))
 
 
+;; Toggle between themes
+(defun toggle-theme ()
+  (interactive)
+  (let ((is-light (find default-light-color-theme custom-enabled-themes)))
+    (dolist (theme custom-enabled-themes)
+      (disable-theme theme))
+    (load-theme
+     (if is-light
+         default-dark-color-theme
+       default-light-color-theme))))
+
+
 (provide 'defuns)
