@@ -44,14 +44,21 @@
 ;; Set exec-path to find homebrew binaries
 (setq exec-path (append exec-path '("/usr/local/bin")))
 
+;; enable auto-pair
+(require 'autopair)
+(autopair-global-mode)
 
-;; Customize Options (defcustom)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Customize Options (defcustom / defvar)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defcustom default-dark-color-theme 'ample-zen
   "Default dark color-scheme")
 (defcustom default-light-color-theme 'whiteboard
   "Default light color-scheme")
+
+(defvar mode-cycles
+  (list '(web-mode js2-mode)))
 
 
 ;; Ido Mode
@@ -86,10 +93,11 @@
 ;; Web Mode / JSX mode
 ;;;;;;;;;;;;;;;;;;;;;;
 
-; auto close html elements on >
+;; auto close html elements on >
 (setq web-mode-enable-auto-closing t)
 (setq web-mode-enable-auto-pairing t)
 (setq web-mode-auto-close-style 2)
+
 
 
 ;; Misc Mode Requires

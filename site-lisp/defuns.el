@@ -1,6 +1,7 @@
 ;;
 ;; Individual functions I've written
 ;;
+(require 'dash)
 
 
 ;; LaTeX keybindings
@@ -161,8 +162,7 @@ inside of it."
   (delete-region (region-beginning) (region-end))
   (insert " "))
 
-
-;; Toggle between themes
+;; Toggle between light and dark themes
 (defun toggle-theme ()
   (interactive)
   (let ((is-light (find default-light-color-theme custom-enabled-themes)))
@@ -172,6 +172,25 @@ inside of it."
      (if is-light
          default-dark-color-theme
        default-light-color-theme))))
+
+;; Read from defined mode cycles, and cycle through them.
+;;   - For example, switch between web-mode, js2-mode, and js3-mode
+(defun last-item (l)
+  (if (eq (cdr l) '())
+      (car l)
+    (last-item (cdr l))))
+(defun next-in-cycle (item cycle)
+  (cond ((not (-contains? cycle item)) (error "item <%s> not in cycle" item))
+        ((eq item (last-item cycle)) (car cycle))
+        (t (cadr (member item cycle))))
+  )
+(defun rotate-mode ()
+  (interactive)
+  (let ((current-mode-list
+         (car (-filter (lambda (l) (-contains? l major-mode)) mode-cycles))))
+    (if (eq current-mode-list '())
+        (message "mode <%s> not included in a mode list" major-mode)
+      (funcall (next-in-cycle major-mode current-mode-list)))))
 
 
 (provide 'defuns)

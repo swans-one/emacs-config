@@ -45,7 +45,7 @@
 (package-initialize)
 
 ;; Keep installed
-(setq keep-installed '(magit paredit yasnippet geiser quack expand-region))
+(setq keep-installed '(magit paredit yasnippet geiser quack expand-region dash))
 (mapc
  (lambda (package)
    (or (package-installed-p package)

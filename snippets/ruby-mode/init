@@ -1,0 +1,11 @@
+# contributor: Erik Swanson <theerikswanson@gmail.com
+# name: initialize
+# key: init
+# --
+attr_reader ${1:$(yas-ruby-args-to-symbols)}
+
+def initalize($1)
+    ${1:$(yas-ruby-args-to-instance-vars)}
+    $0
+end
+

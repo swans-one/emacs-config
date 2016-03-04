@@ -1,0 +1,9 @@
+# contributor: Erik Swanson <theerikswanson@gmail.com
+# name: get-initial-state
+# key: gis
+# --
+getInitialState: function () {
+    return {
+        $0
+    };
+},

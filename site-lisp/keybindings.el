@@ -5,8 +5,14 @@
 ;; Switch windows with one keystroke
 (global-set-key (kbd "C-o") 'other-window)
 
+;; Find file at point
+(global-set-key (kbd "C-c C-f") 'find-file-at-point)
+
 ;; Magit-status
 (global-set-key (kbd "C-x C-g") 'magit-status)
+
+;; Electric-Newline-And-Maybe-Indent
+(global-set-key (kbd "<C-return>") 'electric-newline-and-maybe-indent)
 
 ;; Insert a dollar sign pair
 (global-set-key (kbd "C-c C-d") 'insert-dollar-pair)
@@ -45,6 +51,9 @@
 
 ;; toggle-theme
 (global-set-key (kbd "C-x C-h") 'toggle-theme)
+
+;; Rotate mode
+(global-set-key (kbd "C-x C-m C-m") 'rotate-mode)
 
 ;;
 ;; Mode Specific Keybindings

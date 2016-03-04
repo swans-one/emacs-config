@@ -7,4 +7,6 @@
 (add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
 (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
 
+(add-hook 'term-mode-hook (lambda () (yas-minor-mode -1)))
+
 (provide 'hooks)
