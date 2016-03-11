@@ -1,0 +1,5 @@
+# contributor: Erik Swanson <theerikswanson@gmail.com
+# name: pry
+# key: pry
+# --
+require 'pry'; binding.pry; $0
