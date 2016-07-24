@@ -11,3 +11,5 @@ elpa/*
 
 # Ignore org bookmarks
 bookmarks
+/.org-id-locations
+games
