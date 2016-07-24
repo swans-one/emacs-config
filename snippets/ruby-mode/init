@@ -4,8 +4,6 @@
 # --
 attr_reader ${1:$(yas-ruby-args-to-symbols)}
 
-def initalize($1)
-    ${1:$(yas-ruby-args-to-instance-vars)}
-    $0
+def initialize($1)
+    ${1:$(yas-ruby-args-to-instance-vars)}$0
 end
-
