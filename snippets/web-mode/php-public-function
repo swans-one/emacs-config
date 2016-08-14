@@ -1,0 +1,8 @@
+# contributor: Erik Swanson <theerikswanson@gmail.com>
+# name: php-public-function
+# key: pub
+# --
+public function $1()
+{
+    $0
+}

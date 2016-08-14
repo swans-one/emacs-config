@@ -12,6 +12,12 @@
 (setq web-mode-content-types-alist
       '(("jsx" . "\\.js[x]?\\'")))
 
+(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
+(setq web-mode-engines-alist
+  '(("php"    . "\\.phtml\\'")
+    ("blade"  . "\\.blade\\."))
+)
+
 ;; puppet mode
 (add-to-list 'auto-mode-alist '("\\.pp$" . puppet-mode))
 
