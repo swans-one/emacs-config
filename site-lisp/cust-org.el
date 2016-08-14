@@ -63,4 +63,11 @@
 ;;   - buy
 
 
+;; Configuration for org as
+;;  - an authoring platform
+;;  - a note taking platform
+
+;; Automatically syntax highlight source blocks
+(setq org-src-fontify-natively 1)
+
 (provide 'cust-org)
