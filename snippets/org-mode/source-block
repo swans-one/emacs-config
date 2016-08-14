@@ -1,0 +1,7 @@
+# contributor: Erik Swanson <theerikswanson@gmail.com>
+# name: source-block
+# key: src
+# --
+#+BEGIN_SRC $1
+  $0
+#+END_SRC
