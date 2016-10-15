@@ -1,7 +1,7 @@
 ;; Get rid of visual cruft
-(if (display-graphic-p)
-    (tool-bar-mode 0)
-  (menu-bar-mode 0))
+(when (display-graphic-p)
+  (tool-bar-mode -1)
+  (menu-bar-mode -1))
 (scroll-bar-mode -1)
 (setq column-number-mode t)
 (setq inhibit-startup-message t)
@@ -33,6 +33,10 @@
                 "/usr/local/bin" ":"
                 "/usr/local/sbin" ":"
                 (getenv "PATH")))
+
+;; Use DroidSansMonoDotted font
+(add-to-list 'default-frame-alist '(font . "DroidSansMonoDotted:size=14"))
+(set-face-attribute 'default t :font "DroidSansMonoDotted:size=14")
 
 ;; Custom options for `C-u M-x ps-print-buffer-with-faces`
 (setq ps-print-header nil)
@@ -111,7 +115,7 @@
 ;; If this doesn't work, need to build/install ESS
 ;     cd && mkdir .ESS && cd .ESS
 ;     git clone git://github.com/emacs-ess/ESS.git && cd ESS && make all
-(load "~/.ESS/ESS/lisp/ess-site")
+; (load "~/.ESS/ESS/lisp/ess-site")
 
 
 (provide 'customize)

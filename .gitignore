@@ -13,3 +13,8 @@ elpa/*
 bookmarks
 /.org-id-locations
 games
+
+# Other emacs cruft
+%backup%~
+ido.last
+tramp
