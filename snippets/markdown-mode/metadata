@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: metadata
+# key: meta
+# --
+---
+title: '$1'
+subtitle: '$2'
+author: ${3:Erik Swanson}
+presented: '$4'
+published: '$5'
+last_modified: '$6'
+breadcrumb:
+- link: '/writings'
+  name: 'Writings'
+---
+$0
