@@ -43,13 +43,13 @@
 (package-initialize)
 
 ;; Keep installed
-(setq keep-installed '(magit paredit yasnippet geiser quack expand-region dash))
-(mapc
- (lambda (package)
-   (or (package-installed-p package)
-       (if (y-or-n-p (format "Package %s is missing. Install it?" package))
-	   (package-install package))))
- keep-installed)
+;; (setq keep-installed '(magit paredit yasnippet geiser quack expand-region dash))
+;; (mapc
+;;  (lambda (package)
+;;    (or (package-installed-p package)
+;;        (if (y-or-n-p (format "Package %s is missing. Install it?" package))
+;; 	   (package-install package))))
+;;  keep-installed)
 
 
 ;; Requires

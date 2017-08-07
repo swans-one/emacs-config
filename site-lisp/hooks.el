@@ -10,18 +10,9 @@
 
 ;; emacs-lisp
 (add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
-(add-hook 'emacs-lisp-mode-hook 'paredit-mode)
-
-;; rust
-(add-hook 'rust-mode-hook 'cargo-minor-mode)
-
-;; ruby
-(add-hook 'ruby-mode-hook 'ruby-electric-mode)
-(add-hook 'ruby-mode-hook (lambda () (auto-pair-mode -1)))
 
 ;; scheme
 (add-hook 'scheme-mode-hook 'show-paren-mode)
-(add-hook 'scheme-mode-hook 'paredit-mode)
 
 ;; term
 (add-hook 'term-mode-hook (lambda () (yas-minor-mode -1)))

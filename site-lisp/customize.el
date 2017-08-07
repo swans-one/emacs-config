@@ -11,6 +11,19 @@
 (setq-default indent-tabs-mode nil)
 (global-subword-mode 1)
 
+;; Ido Mode
+;;;;;;;;;;;
+(require 'ido)
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(ido-mode t)
+(setq ido-auto-merge-work-directories-length -1) ;; don't backwards search for files
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'post-forward)
+
+;; Make the text size reasonable
+(set-face-attribute 'default nil :height 100)
+
 ;; Visible Bell instead of Audible bell
 (defun my-terminal-visible-bell ()
    "A friendlier visual bell effect."
@@ -33,10 +46,6 @@
                 "/usr/local/bin" ":"
                 "/usr/local/sbin" ":"
                 (getenv "PATH")))
-
-;; Use DroidSansMonoDotted font
-(add-to-list 'default-frame-alist '(font . "DroidSansMonoDotted:size=14"))
-(set-face-attribute 'default t :font "DroidSansMonoDotted:size=14")
 
 ;; Custom options for `C-u M-x ps-print-buffer-with-faces`
 (setq ps-print-header nil)
@@ -63,18 +72,6 @@
 
 (defvar mode-cycles
   (list '(web-mode js2-mode)))
-
-
-;; Ido Mode
-;;;;;;;;;;;
-
-(require 'ido)
-(setq ido-enable-flex-matching t)
-(setq ido-everywhere t)
-(ido-mode t)
-(setq ido-auto-merge-work-directories-length -1) ;; don't backwards search for files
-(require 'uniquify)
-(setq uniquify-buffer-name-style 'post-forward)
 
 
 ;; C-mode
