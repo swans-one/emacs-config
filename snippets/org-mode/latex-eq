@@ -1,8 +1,8 @@
 # -*- mode: snippet -*-
-# name: begin
-# key: \begin
+# name: latex-eq
+# key: \equ
 # expand-env: ((yas-indent-line 'fixed))
 # --
-\begin{$1}
+\begin{equation}
   $0
-\end{$1}
+\end{equation}
