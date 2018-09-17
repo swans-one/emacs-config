@@ -91,14 +91,17 @@
 (setq yas-prompt-functions '(yas-ido-prompt))
 
 
-;; Web Mode / JSX mode
-;;;;;;;;;;;;;;;;;;;;;;
+;; Web Mode / JSX mode / purescript mode
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; auto close html elements on >
 (setq web-mode-enable-auto-closing t)
 (setq web-mode-enable-auto-pairing t)
 (setq web-mode-auto-close-style 2)
 
+(add-hook 'purescript-mode-hook
+  (lambda ()
+    (turn-on-purescript-indentation)))
 
 
 ;; Misc Mode Requires
