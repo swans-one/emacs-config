@@ -74,6 +74,10 @@
   (list '(web-mode js2-mode)))
 
 
+;; Erik-mode
+;;;;;;;;;;;;
+(require 'erik-mode)
+
 ;; C-mode
 ;;;;;;;;;
 
@@ -97,11 +101,12 @@
 ;; auto close html elements on >
 (setq web-mode-enable-auto-closing t)
 (setq web-mode-enable-auto-pairing t)
-(setq web-mode-auto-close-style 2)
+(setq web-mode-auto-close-style 1)
 
 (add-hook 'purescript-mode-hook
   (lambda ()
     (turn-on-purescript-indentation)))
+(add-hook 'sgml-mode-hook 'emmet-mode)
 
 
 ;; Misc Mode Requires
