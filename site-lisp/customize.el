@@ -98,6 +98,9 @@
 ;; Web Mode / JSX mode / purescript mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; Use for html
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+
 ;; auto close html elements on >
 (setq web-mode-enable-auto-closing t)
 (setq web-mode-enable-auto-pairing t)
@@ -107,6 +110,7 @@
   (lambda ()
     (turn-on-purescript-indentation)))
 (add-hook 'sgml-mode-hook 'emmet-mode)
+(add-hook 'web-mode-hook 'emmet-mode)
 
 
 ;; Misc Mode Requires
