@@ -1,0 +1,36 @@
+# -*- mode: snippet -*-
+# name: webcomponent
+# key: webcomponent
+# --
+
+const $3 = () => html\`
+  <style>
+  </style>
+  $0
+\`
+
+export class $1 extends HTMLElement {
+    constructor() {
+        super();
+        this.root = this.attachShadow({mode: 'open'})
+        this.render()
+    }
+
+    connectedCallback() {
+    }
+
+    render() {
+        render(
+            $3(),
+            this.root
+        );
+    }
+
+    static get observedAttributes() {
+        return [];
+    }
+
+    attributeChangedCallback(attr, oldVal, newVal) {
+    }
+}
+customElements.define('$2', $1)
