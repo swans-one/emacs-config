@@ -98,8 +98,17 @@
 (define-key erik-mode-map (kbd "C-j <backspace>") 'erik-collapse-line-back)
 
 ;; Binding functions I didn't write
+(define-key erik-mode-map (kbd "C-j C-j") 'ido-select-text)
 (define-key erik-mode-map (kbd "C-j e") 'eval-region)
 (define-key erik-mode-map (kbd "C-j l") 'emmet-expand-line)
+
+(defadvice load (after give-my-keybindings-priority)
+  "Try to ensure that my keybindings always have priority."
+  (when (not (eq (car (car minor-mode-map-alist)) 'erik-mode))
+      (let ((mykeys (assq 'erik-mode minor-mode-map-alist)))
+        (assq-delete-all 'erik-mode minor-mode-map-alist)
+        (add-to-list 'minor-mode-map-alist mykeys))))
+(ad-activate 'load)
 
 ;;;###autoload
 (define-minor-mode erik-mode
