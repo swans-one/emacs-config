@@ -38,6 +38,20 @@
   (delete-region (region-beginning) (region-end))
   (insert " "))
 
+(defun erik-md-to-org-link ()
+  (interactive)
+  (search-backward "[" nil nil 1)
+  (push-mark)
+  (search-forward "]" nil nil 1)
+  (kill-region 0 0 1)
+  (delete-char 1)
+  (insert "[[")
+  (search-forward ")" nil nil 1)
+  (delete-backward-char 1)
+  (insert "]")
+  (yank)
+  (insert "]"))
+
 ;; Terminal functions
 ;;;;;;;;;;;;;;;;;;;;;
 (defun erik-term-send-to-shell (start end)
@@ -96,6 +110,9 @@
 (define-key erik-mode-map (kbd "C-j w") 'erik-what-file)
 (define-key erik-mode-map (kbd "C-j u") 'erik-underline-line)
 (define-key erik-mode-map (kbd "C-j <backspace>") 'erik-collapse-line-back)
+
+;; For org mode stuff
+(define-key erik-mode-map (kbd "C-j o l") 'erik-md-to-org-link)
 
 ;; Binding functions I didn't write
 (define-key erik-mode-map (kbd "C-j C-j") 'ido-select-text)
