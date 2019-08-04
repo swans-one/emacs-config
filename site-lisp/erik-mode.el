@@ -74,6 +74,31 @@
   (with-current-buffer "*ansi-term*" (term-send-up))
   (process-send-string"*ansi-term*" "\n"))
 
+(defun erik-prev-term ()
+  (interactive)
+  (erik-rotate-term -1))
+
+(defun erik-next-term ()
+  (interactive)
+  (erik-rotate-term 1))
+
+(defun erik-rotate-term (dir)
+  (let* ((buf (buffer-name))
+         (term-num (erik-ansi-term-number buf)))
+    (if (= term-num 0)
+        (switch-to-buffer (get-buffer "*ansi-term*"))
+      (switch-to-buffer
+       (or (get-buffer (format "*ansi-term*<%d>" (+ term-num dir)))
+           (get-buffer "*ansi-term*"))))))
+
+(defun erik-ansi-term-number (buf-name)
+  (let* ((regexp "\\*ansi-term\\*\\(<\\([0-9]+\\)>\\)?")
+         (match (string-match regexp buf-name))
+         (num (match-string 2 buf-name)))
+    (cond ((not match) 0)
+          ((not num) 1)
+          ((string-to-number num)))))
+
 
 ;; Underlining
 ;;;;;;;;;;;;;;
@@ -131,6 +156,8 @@
 ;; C-j t _ -- Terminal commands
 (define-key erik-mode-map (kbd "C-j t s") 'erik-term-send-to-shell)
 (define-key erik-mode-map (kbd "C-j t l") 'erik-term-run-last)
+(define-key erik-mode-map (kbd "C-j t n") 'erik-next-term)
+(define-key erik-mode-map (kbd "C-j t p") 'erik-prev-term)
 
 ;; C-j o _ -- org mode stuff
 (define-key erik-mode-map (kbd "C-j o l") 'erik-md-to-org-link)
