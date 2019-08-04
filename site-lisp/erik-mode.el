@@ -38,6 +38,9 @@
   (delete-region (region-beginning) (region-end))
   (insert " "))
 
+;; Org-mode functions
+;;;;;;;;;;;;;;;;;;;;;
+
 (defun erik-md-to-org-link ()
   (interactive)
   (search-backward "[" nil nil 1)
@@ -51,6 +54,13 @@
   (insert "]")
   (yank)
   (insert "]"))
+
+;; Buffer Functions
+;;;;;;;;;;;;;;;;;;;
+
+(defun erik-reload-file ()
+  (interactive)
+  (revert-buffer :ignore-auto :noconfirm))
 
 ;; Terminal functions
 ;;;;;;;;;;;;;;;;;;;;;
@@ -103,15 +113,26 @@
 
 ;; Full overrides
 (define-key erik-mode-map (kbd "M-Q") 'erik-unfill-paragraph)
+;;(define-key erik-mode-map (kbd "C-M <backspace>") 'erik-collapse-line-back)
 
+;; Erik-mode overrides
+;;
 ;; C-j is the erik-mode prefix-key
-(define-key erik-mode-map (kbd "C-j t s") 'erik-term-send-to-shell)
-(define-key erik-mode-map (kbd "C-j t l") 'erik-term-run-last)
+
+;;
+;; C-j Globals
+;;
 (define-key erik-mode-map (kbd "C-j w") 'erik-what-file)
 (define-key erik-mode-map (kbd "C-j u") 'erik-underline-line)
-(define-key erik-mode-map (kbd "C-j <backspace>") 'erik-collapse-line-back)
 
-;; For org mode stuff
+;; C-j b _ -- Buffer manipulation
+(define-key erik-mode-map (kbd "C-j b r") 'erik-reload-file)
+
+;; C-j t _ -- Terminal commands
+(define-key erik-mode-map (kbd "C-j t s") 'erik-term-send-to-shell)
+(define-key erik-mode-map (kbd "C-j t l") 'erik-term-run-last)
+
+;; C-j o _ -- org mode stuff
 (define-key erik-mode-map (kbd "C-j o l") 'erik-md-to-org-link)
 
 ;; Binding functions I didn't write
