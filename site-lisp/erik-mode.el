@@ -158,6 +158,7 @@
 (define-key erik-mode-map (kbd "C-j t l") 'erik-term-run-last)
 (define-key erik-mode-map (kbd "C-j t n") 'erik-next-term)
 (define-key erik-mode-map (kbd "C-j t p") 'erik-prev-term)
+(define-key erik-mode-map (kbd "C-j t o") 'ansi-term)
 
 ;; C-j o _ -- org mode stuff
 (define-key erik-mode-map (kbd "C-j o l") 'erik-md-to-org-link)
