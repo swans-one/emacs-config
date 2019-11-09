@@ -8,7 +8,11 @@
 
 ;; Editing improvements: transient-mark, tabs, subword mode
 (transient-mark-mode t)
-(setq-default indent-tabs-mode nil)
+(setq-default
+ indent-tabs-mode nil
+ tab-stop-list (quote (4 8 12))
+ tab-width 4
+ indent-line-function 'insert-tab)
 (global-subword-mode 1)
 
 ;; Ido Mode
