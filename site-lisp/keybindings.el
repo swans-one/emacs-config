@@ -44,5 +44,7 @@
 )
 (add-hook 'python-mode-hook 'erik-python-mode-keys)
 
+(eval-after-load "term"
+  '(define-key term-raw-map (kbd "C-c C-y") 'term-paste))
 
 (provide 'keybindings)
