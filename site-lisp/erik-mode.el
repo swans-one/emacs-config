@@ -99,6 +99,27 @@
           ((not num) 1)
           ((string-to-number num)))))
 
+(defun erik-toggle-ansi-term ()
+  (interactive)
+  (let ((open-ansi (get-window-with-predicate
+                    (lambda (win)
+                      (let* ((buf (window-buffer win))
+                             (name (buffer-name buf)))
+                        (string-match "\\*ansi-term\\*.*" name))))))
+    (if open-ansi
+        ;; If there is an window open with an ansi-term buffer, close it
+        (delete-window open-ansi)
+      ;; Otherwise create a new window & open the most recent ansi term in it
+      (let ((new-window (split-window (frame-root-window) -10 'below))
+            (recent-ansi-term (first-matching
+                               "\\*ansi-term\\*.*"
+                               (mapcar (lambda (x)
+                                         (format "%s" x)) (buffer-list)))))
+        (select-window new-window)
+        (if recent-ansi-term ;; nil if none are open
+            (set-window-buffer new-window recent-ansi-term)
+          (ansi-term "/bin/bash"))))))
+
 
 ;; Underlining
 ;;;;;;;;;;;;;;
@@ -158,6 +179,7 @@
 (define-key erik-mode-map (kbd "C-j t l") 'erik-term-run-last)
 (define-key erik-mode-map (kbd "C-j t n") 'erik-next-term)
 (define-key erik-mode-map (kbd "C-j t p") 'erik-prev-term)
+(define-key erik-mode-map (kbd "C-j t t") 'erik-toggle-ansi-term)
 (define-key erik-mode-map (kbd "C-j t o") 'ansi-term)
 
 ;; C-j o _ -- org mode stuff
