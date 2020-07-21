@@ -4,6 +4,7 @@
 ;;;;;;;;;;;;
 
 (defun first-matching (pattern list)
+  "Return the first item in a list matching pattern, or nil if no match."
   (if (not list)
       nil
       (if (string-match pattern (car list))
