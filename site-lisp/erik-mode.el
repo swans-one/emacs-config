@@ -1,5 +1,19 @@
 (require 'dash)
 
+;; Utilities
+;;;;;;;;;;;;
+
+(defun first-matching (pattern list)
+  (if (not list)
+      nil
+      (if (string-match pattern (car list))
+          (car list)
+        (first-matching pattern (cdr list)))))
+
+
+;; One-Off Functions
+;;;;;;;;;;;;;;;;;;;;
+
 (defun erik-what-file ()
   (interactive)
   (message (buffer-file-name)))
