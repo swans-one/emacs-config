@@ -102,13 +102,25 @@
 ;; Web Mode / JSX mode / purescript mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Use for html
+;; Auto-use
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.svelte\\'" . web-mode))
 
 ;; auto close html elements on >
-(setq web-mode-enable-auto-closing t)
-(setq web-mode-enable-auto-pairing t)
-(setq web-mode-auto-close-style 1)
+(defun my-web-mode-hook ()
+  "Hooks for Web mode."
+  (setq web-mode-enable-auto-closing t
+        web-mode-enable-auto-pairing t
+        web-mode-auto-close-style 1
+        web-mode-markup-indent-offset 2
+        web-mode-css-indent-offset 2
+        web-mode-code-indent-offset 2
+        web-mode-script-padding 2
+        web-mode-style-padding 2
+        web-mode-block-padding 2)
+)
+(add-hook 'web-mode-hook  'my-web-mode-hook)
+
 
 (add-hook 'purescript-mode-hook
   (lambda ()
