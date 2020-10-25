@@ -1,0 +1,46 @@
+* Packages
+
+| Package name       | selected? | customized? | done |
+|--------------------+-----------+-------------+------|
+| yaml-mode          | Yes       |             |      |
+| emmet-mode         | Yes       |             |      |
+| web-mode           | Yes       | Yes         |      |
+| yasnippet          | Yes       | Yes         |      |
+| quack              | Yes       |             |      |
+| paredit            | Yes       |             |      |
+| magit              | Yes       |             |      |
+| haskell-mode       | Yes       |             |      |
+| geiser             | Yes       |             |      |
+| expand-region      | Yes       |             |      |
+| dash-functional    | Yes       |             |      |
+| autopair           | Yes       |             |      |
+| ido                | No        | Yes         |      |
+| uniquify           | No        | Yes         |      |
+| autopair           | No        | Yes         |      |
+| c-mode             | No        | Yes         |      |
+| purescript-mode    | No        | Yes         |      |
+| dcpu16-mode        |           |             |      |
+| puppet-mode        |           |             |      |
+| markdown-mode      |           |             |      |
+| rainbow-delimiters |           |             |      |
+|                    |           |             |      |
+
+* My Code
+
+** Todos [0/5]
+- [-] Take inventory of existing customization (add to table above)
+  - [X] site-lisp/customize.el
+  - [ ] site-lisp/defuns.el
+  - [ ] site-lisp/keybindings.el
+  - [ ] site-lisp/mode-mappings.el
+  - [ ] site-lisp/hooks.el
+  - [ ] site-lisp/cust-org.el
+- [ ] Figure out how to install use-package / get it running
+- [ ] Do three test packages configurations:
+  - [ ] yasnippet
+  - [ ] ido
+  - [ ] org
+- [ ] Convert all other packages in the table to use-package
+- [ ] Incorporate site-lisp packages:
+  - [ ] Erik-mode
+  - [ ] dcpu16-mode
