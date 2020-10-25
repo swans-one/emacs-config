@@ -18,3 +18,5 @@ games
 %backup%~
 ido.last
 tramp
+transient
+session.*
