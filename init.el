@@ -39,6 +39,17 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
+(use-package ido
+  :init (ido-mode t)
+  :config
+  (setq ido-enable-flex-matching t)
+  (setq ido-everywhere t)
+  ;; don't backwards search for files
+  (setq ido-auto-merge-work-directories-length -1))
+
+(use-package uniquify
+  :config
+  (setq uniquify-buffer-name-style 'post-forward))
 
 ;; Requires
 ;;;;;;;;;;;
@@ -52,13 +63,8 @@
 
 ;; Ido Mode
 ;;;;;;;;;;;
-(require 'ido)
-(setq ido-enable-flex-matching t)
-(setq ido-everywhere t)
-(ido-mode t)
-(setq ido-auto-merge-work-directories-length -1) ;; don't backwards search for files
-(require 'uniquify)
-(setq uniquify-buffer-name-style 'post-forward)
+;; (require 'uniquify)
+;; (setq uniquify-buffer-name-style 'post-forward)
 
 
 ;; Use pdflatex to compile LaTeX files

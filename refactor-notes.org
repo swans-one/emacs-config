@@ -14,8 +14,8 @@
 | expand-region      | Yes       |             |      |
 | dash-functional    | Yes       | No          |      |
 | autopair           | Yes       |             |      |
-| ido                | No        | Yes         |      |
-| uniquify           | No        | Yes         |      |
+| ido                | No        | Yes         | X    |
+| uniquify           | No        | Yes         | X    |
 | autopair           | No        | Yes         |      |
 | c-mode             | No        | Yes         |      |
 | purescript-mode    | No        | Yes         |      |
@@ -47,9 +47,9 @@
   - [X] site-lisp/hooks.el
   - [X] site-lisp/cust-org.el
 - [X] Figure out how to install use-package / get it running
-- [ ] Do three test packages configurations:
+- [-] Do three test packages configurations:
   - [ ] yasnippet
-  - [ ] ido
+  - [X] ido
   - [ ] org
 - [ ] Convert all other packages in the table to use-package
 - [ ] Incorporate site-lisp packages:
