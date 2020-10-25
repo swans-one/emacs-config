@@ -36,20 +36,14 @@
 
 ;; Add other repositories to the package manager
 (require 'package)
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/") t)
-(add-to-list 'package-archives
-             '("org" . "http://orgmode.org/elpa/"))
+(setq package-enable-at-startup nil)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
 (package-initialize)
 
-;; Keep installed
-;; (setq keep-installed '(magit paredit yasnippet geiser quack expand-region dash))
-;; (mapc
-;;  (lambda (package)
-;;    (or (package-installed-p package)
-;;        (if (y-or-n-p (format "Package %s is missing. Install it?" package))
-;; 	   (package-install package))))
-;;  keep-installed)
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
 
 
 ;; Requires
@@ -74,7 +68,7 @@
  '(electric-indent-mode nil)
  '(package-selected-packages
    (quote
-    (yaml-mode emmet-mode web-mode yasnippet quack paredit magit haskell-mode geiser expand-region dash-functional autopair))))
+    (use-package gnu-elpa-keyring-update yaml-mode emmet-mode web-mode yasnippet quack paredit magit haskell-mode geiser expand-region dash-functional autopair))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -38,7 +38,7 @@
 
 * My Code
 
-** Todos [1/6]
+** Todos [2/6]
 - [X] Take inventory of existing customization (add to table above)
   - [X] site-lisp/customize.el
   - [X] site-lisp/defuns.el
@@ -46,7 +46,7 @@
   - [X] site-lisp/mode-mappings.el
   - [X] site-lisp/hooks.el
   - [X] site-lisp/cust-org.el
-- [ ] Figure out how to install use-package / get it running
+- [X] Figure out how to install use-package / get it running
 - [ ] Do three test packages configurations:
   - [ ] yasnippet
   - [ ] ido
