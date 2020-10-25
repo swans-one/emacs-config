@@ -129,18 +129,4 @@
 (add-hook 'web-mode-hook 'emmet-mode)
 
 
-;; Misc Mode Requires
-;;;;;;;;;;;;;;;;;;;;;
-
-(require 'dcpu16-mode)
-(require 'puppet-mode)
-(require 'markdown-mode)
-(require 'rainbow-delimiters)
-
-;; If this doesn't work, need to build/install ESS
-;     cd && mkdir .ESS && cd .ESS
-;     git clone git://github.com/emacs-ess/ESS.git && cd ESS && make all
-; (load "~/.ESS/ESS/lisp/ess-site")
-
-
 (provide 'customize)

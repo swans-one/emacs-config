@@ -20,16 +20,6 @@
       (expand-file-name "site-lisp" user-emacs-directory))
 (add-to-list 'load-path site-lisp-dir)
 
-;; Add the following subdirectories of the `site-lisp-dir` to the
-;; load-path.
-(let ((default-directory site-lisp-dir))
-  (normal-top-level-add-to-load-path
-   '("dcpu16-mode"
-     "puppet-mode"
-     "markdown-mode"
-     "rainbow-delimiters")
-   ))
-
 
 ;; Package Management
 ;;;;;;;;;;;;;;;;;;;;;
