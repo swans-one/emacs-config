@@ -39,6 +39,9 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
+;; Package Configuration
+;;;;;;;;;;;;;;;;;;;;;;;;
+
 (use-package ido
   :init (ido-mode t)
   :config
@@ -51,6 +54,13 @@
   :config
   (setq uniquify-buffer-name-style 'post-forward))
 
+(use-package yasnippet
+  :config
+  (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
+  (setq yas-prompt-functions '(yas-ido-prompt))
+  (yas-global-mode 1))
+
+
 ;; Requires
 ;;;;;;;;;;;
 
@@ -60,11 +70,6 @@
 (require 'hooks)
 (require 'cust-org)
 
-
-;; Ido Mode
-;;;;;;;;;;;
-;; (require 'uniquify)
-;; (setq uniquify-buffer-name-style 'post-forward)
 
 
 ;; Use pdflatex to compile LaTeX files
@@ -97,14 +102,6 @@
               c-basic-offset 4)
 
 
-;; YaSnippet
-;;;;;;;;;;;;
-
-(require 'yasnippet)
-(with-eval-after-load 'yasnippet
-    (setq yas-snippet-dirs '("~/.emacs.d/snippets")))
-(yas-global-mode 1)
-(setq yas-prompt-functions '(yas-ido-prompt))
 
 
 ;; Web Mode / JSX mode / purescript mode

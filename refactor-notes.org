@@ -5,7 +5,7 @@
 | yaml-mode          | Yes       |             |      |
 | emmet-mode         | Yes       |             |      |
 | web-mode           | Yes       | Yes         |      |
-| yasnippet          | Yes       | Yes         |      |
+| yasnippet          | Yes       | Yes         | X    |
 | quack              | Yes       |             |      |
 | paredit            | Yes       |             |      |
 | magit              | Yes       | Yes         |      |
@@ -48,7 +48,7 @@
   - [X] site-lisp/cust-org.el
 - [X] Figure out how to install use-package / get it running
 - [-] Do three test packages configurations:
-  - [ ] yasnippet
+  - [X] yasnippet
   - [X] ido
   - [ ] org
 - [ ] Convert all other packages in the table to use-package
