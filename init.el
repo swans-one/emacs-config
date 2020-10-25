@@ -6,7 +6,7 @@
 ;; The customizations are further organized into the following files,
 ;; all within `site-lisp`:
 ;;
-;;     - customize.el   = customizations to the base system
+;;     - customize.el   = Simple Aesthetic customizations
 ;;     - defuns.el      = functions that I've written
 ;;     - keybindings.el = Global and mode specific keybindings
 ;;     - mode-mappings  = map filenames to major modes
@@ -20,9 +20,13 @@
       (expand-file-name "site-lisp" user-emacs-directory))
 (add-to-list 'load-path site-lisp-dir)
 
+;; Aesthetic customizations
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'customize)
 
-;; Package Management
-;;;;;;;;;;;;;;;;;;;;;
+
+;; Package Management Setup
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Add other repositories to the package manager
 (require 'package)
@@ -38,12 +42,94 @@
 
 ;; Requires
 ;;;;;;;;;;;
-(require 'customize)
+
 (require 'defuns)
 (require 'keybindings)
 (require 'mode-mappings)
 (require 'hooks)
 (require 'cust-org)
+
+
+;; Ido Mode
+;;;;;;;;;;;
+(require 'ido)
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(ido-mode t)
+(setq ido-auto-merge-work-directories-length -1) ;; don't backwards search for files
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'post-forward)
+
+
+;; Use pdflatex to compile LaTeX files
+(setq latex-run-command "pdflatex")
+(setenv "PATH" (concat
+                "/usr/texbin" ":"
+                "/usr/local/bin" ":"
+                "/usr/local/sbin" ":"
+                (getenv "PATH")))
+
+
+;; Set exec-path to find homebrew binaries
+(setq exec-path (append exec-path '("/usr/local/bin")))
+
+;; enable auto-pair
+(require 'autopair)
+(autopair-global-mode)
+
+(defvar mode-cycles
+  (list '(web-mode js2-mode)))
+
+;; Erik-mode
+;;;;;;;;;;;;
+(require 'erik-mode)
+
+;; C-mode
+;;;;;;;;;
+
+(setq-default c-default-style "linux"
+              c-basic-offset 4)
+
+
+;; YaSnippet
+;;;;;;;;;;;;
+
+(require 'yasnippet)
+(with-eval-after-load 'yasnippet
+    (setq yas-snippet-dirs '("~/.emacs.d/snippets")))
+(yas-global-mode 1)
+(setq yas-prompt-functions '(yas-ido-prompt))
+
+
+;; Web Mode / JSX mode / purescript mode
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Auto-use
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.svelte\\'" . web-mode))
+
+;; auto close html elements on >
+(defun my-web-mode-hook ()
+  "Hooks for Web mode."
+  (setq web-mode-enable-auto-closing t
+        web-mode-enable-auto-pairing t
+        web-mode-auto-close-style 1
+        web-mode-markup-indent-offset 2
+        web-mode-css-indent-offset 2
+        web-mode-code-indent-offset 2
+        web-mode-script-padding 2
+        web-mode-style-padding 2
+        web-mode-block-padding 2)
+)
+(add-hook 'web-mode-hook  'my-web-mode-hook)
+
+
+(add-hook 'purescript-mode-hook
+  (lambda ()
+    (turn-on-purescript-indentation)))
+(add-hook 'sgml-mode-hook 'emmet-mode)
+(add-hook 'web-mode-hook 'emmet-mode)
+
 
 
 (custom-set-variables
