@@ -45,7 +45,8 @@
   :demand t
   :init
   (add-hook 'web-mode-hook (lambda () (autopair-mode -1)))
-)
+  :config
+  (autopair-global-mode))
 
 (use-package emmet-mode
   :hook (web-mode sgml-mode))
@@ -112,7 +113,6 @@
 
 (require 'defuns)
 (require 'keybindings)
-(require 'mode-mappings)
 
 
 ;; Use pdflatex to compile LaTeX files
@@ -128,8 +128,8 @@
 (setq exec-path (append exec-path '("/usr/local/bin")))
 
 ;; enable auto-pair
-(require 'autopair)
-(autopair-global-mode)
+;; (require 'autopair)
+;; (autopair-global-mode)
 
 (defvar mode-cycles
   (list '(web-mode js2-mode)))
