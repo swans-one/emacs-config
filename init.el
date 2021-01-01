@@ -78,6 +78,17 @@
 (use-package show-paren-mode
   :hook (emacs-lisp-mode scheme-mode))
 
+(use-package tex-mode
+  :mode "\\.tex\\'"
+  :config
+  (setq latex-run-command "pdflatex")
+  (setenv "PATH" (concat
+                  "/usr/texbin" ":"
+                  "/usr/local/bin" ":"
+                  "/usr/local/sbin" ":"
+                  (getenv "PATH")))
+  )
+
 (use-package uniquify
   :config
   (setq uniquify-buffer-name-style 'post-forward))
@@ -114,22 +125,8 @@
 (require 'defuns)
 (require 'keybindings)
 
-
-;; Use pdflatex to compile LaTeX files
-(setq latex-run-command "pdflatex")
-(setenv "PATH" (concat
-                "/usr/texbin" ":"
-                "/usr/local/bin" ":"
-                "/usr/local/sbin" ":"
-                (getenv "PATH")))
-
-
 ;; Set exec-path to find homebrew binaries
 (setq exec-path (append exec-path '("/usr/local/bin")))
-
-;; enable auto-pair
-;; (require 'autopair)
-;; (autopair-global-mode)
 
 (defvar mode-cycles
   (list '(web-mode js2-mode)))
