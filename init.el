@@ -58,6 +58,13 @@
   ;; don't backwards search for files
   (setq ido-auto-merge-work-directories-length -1))
 
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode)))
+
 (use-package org
   :mode ("\\.org\\'" . org-mode)
   :config
@@ -106,7 +113,6 @@
 (require 'defuns)
 (require 'keybindings)
 (require 'mode-mappings)
-(require 'hooks)
 
 
 ;; Use pdflatex to compile LaTeX files
