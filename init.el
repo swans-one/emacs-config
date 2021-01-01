@@ -41,6 +41,15 @@
 ;; Package Configuration
 ;;;;;;;;;;;;;;;;;;;;;;;;
 
+(use-package autopair
+  :demand t
+  :init
+  (add-hook 'web-mode-hook (lambda () (autopair-mode -1)))
+)
+
+(use-package emmet-mode
+  :hook (web-mode sgml-mode))
+
 (use-package ido
   :init (ido-mode t)
   :config
@@ -64,6 +73,22 @@
 (use-package uniquify
   :config
   (setq uniquify-buffer-name-style 'post-forward))
+
+(use-package web-mode
+  :mode (("\\.html?\\'" . web-mode)
+         ("\\.js[x]?\\'" . web-mode)
+         ("\\.svelte\\'" . web-mode))
+  :config
+  (setq web-mode-enable-auto-closing t
+        web-mode-enable-auto-pairing t
+        web-mode-auto-close-style 1
+        web-mode-markup-indent-offset 2
+        web-mode-css-indent-offset 2
+        web-mode-code-indent-offset 2
+        web-mode-script-padding 2
+        web-mode-style-padding 2
+        web-mode-block-padding 2)
+  )
 
 (use-package yasnippet
   :init
@@ -114,36 +139,6 @@
               c-basic-offset 4)
 
 
-
-
-;; Web Mode / JSX mode / purescript mode
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; Auto-use
-(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.svelte\\'" . web-mode))
-
-;; auto close html elements on >
-(defun my-web-mode-hook ()
-  "Hooks for Web mode."
-  (setq web-mode-enable-auto-closing t
-        web-mode-enable-auto-pairing t
-        web-mode-auto-close-style 1
-        web-mode-markup-indent-offset 2
-        web-mode-css-indent-offset 2
-        web-mode-code-indent-offset 2
-        web-mode-script-padding 2
-        web-mode-style-padding 2
-        web-mode-block-padding 2)
-)
-(add-hook 'web-mode-hook  'my-web-mode-hook)
-
-
-(add-hook 'purescript-mode-hook
-  (lambda ()
-    (turn-on-purescript-indentation)))
-(add-hook 'sgml-mode-hook 'emmet-mode)
-(add-hook 'web-mode-hook 'emmet-mode)
 
 
 
