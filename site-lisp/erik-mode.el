@@ -40,18 +40,18 @@
 (defun erik-collapse-line-back ()
   "Backwards collapse the line, repeat with backspace"
   (interactive)
-  (setq erik-unfill-count (+ erik-unfill-count 1))
-  (when (called-interactively-p 'interactive)
-    (set-transient-map
-     (let ((map (make-sparse-keymap)))
-       (define-key map (kbd "<backspace>") 'erik-collapse-line-back)
-       map)))
   (back-to-indentation)
   (push-mark)
   (beginning-of-line)
   (backward-char 1)
   (delete-region (region-beginning) (region-end))
-  (insert " "))
+  (insert " ")
+
+  ;; Only need to repeat backspace
+  (set-transient-map
+   (let ((map (make-sparse-keymap)))
+     (define-key map (kbd "<backspace>") 'erik-collapse-line-back)
+     map)))
 
 ;; Org-mode functions
 ;;;;;;;;;;;;;;;;;;;;;
@@ -174,7 +174,12 @@
 
 ;; Full overrides
 (define-key erik-mode-map (kbd "M-Q") 'erik-unfill-paragraph)
-;;(define-key erik-mode-map (kbd "C-M <backspace>") 'erik-collapse-line-back)
+(define-key erik-mode-map (kbd "C-o") 'other-window)
+(define-key erik-mode-map (kbd "C-c C-f") 'find-file-at-point)
+(define-key erik-mode-map (kbd "<C-return>") 'electric-newline-and-maybe-indent)
+(define-key erik-mode-map (kbd "C-x C-g") 'magit-status)
+(define-key erik-mode-map (kbd "C-]") 'er/expand-region)
+(define-key erik-mode-map (kbd "<C-M-backspace>") 'erik-collapse-line-back)
 
 ;; Erik-mode overrides
 ;;
@@ -204,6 +209,7 @@
 (define-key erik-mode-map (kbd "C-j C-j") 'ido-select-text)
 (define-key erik-mode-map (kbd "C-j e") 'eval-region)
 (define-key erik-mode-map (kbd "C-j l") 'emmet-expand-line)
+
 
 (defadvice load (after give-my-keybindings-priority)
   "Try to ensure that my keybindings always have priority."

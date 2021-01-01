@@ -52,6 +52,9 @@
   :config
   (autopair-global-mode))
 
+(use-package dash
+  :ensure t)
+
 (use-package emmet-mode
   :hook (web-mode sgml-mode))
 
@@ -81,6 +84,10 @@
 
 (use-package show-paren-mode
   :hook (emacs-lisp-mode scheme-mode))
+
+(use-package term
+  :config
+  (define-key term-raw-map (kbd "C-c C-y") 'term-paste))
 
 (use-package tex-mode
   :mode "\\.tex\\'"
@@ -127,7 +134,6 @@
 ;;;;;;;;;;;
 
 (require 'defuns)
-(require 'keybindings)
 
 ;; Erik-mode
 ;;;;;;;;;;;;

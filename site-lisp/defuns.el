@@ -4,17 +4,6 @@
 (require 'dash)
 
 
-;; What file am I looking at.
-(defun my/what-file () (interactive) (message (buffer-file-name)))
-
-;; Django Template function
-(defun my/insert-new-django-block ()
-  "Insert a new block statement, move point to block name."
-  (interactive)
-  (insert "{% block %}{% endblock %}")
-  (backward-char 16)
-)
-
 ;; Python what-class
 (defun my/python-what-class ()
   (interactive)
@@ -62,38 +51,6 @@
   (comment-region (region-beginning) (region-end))
 )
 
-;; Underlining
-(setq my/underline-char-sequence '(?= ?- ?~ ?`))
-
-(defun my/underline-char (char)
-  "Return the next appropriate character in the underline sequence"
-  (let ((next-underline (member char my/underline-char-sequence)))
-    (if (and next-underline (nth 1 next-underline))
-        (nth 1 next-underline)
-      (car my/underline-char-sequence))))
-
-(defun my/already-underlined (cur-under-char)
-  "Take the first character and determine if it's an underline"
-  (if (member cur-under-char my/underline-char-sequence)
-      t
-    nil))
-
-(defun my/underline-line ()
-  "Underline the current line, cycle through underlines"
-  (interactive)
-  (end-of-line)
-  (let* ((cur-under-char (char-after (+ (point) 1)))
-         (next-under-char (my/underline-char cur-under-char))
-         (column (current-column))
-         (line-already-underlined (my/already-underlined cur-under-char)))
-    (if line-already-underlined
-        (progn (forward-char)
-            (delete-region (point) (line-end-position)))
-      (insert-char ?\n))
-    (insert-char next-under-char column))
-  (beginning-of-line)
-  (forward-line -1))
-
 ;; Pbcopy function
 (defun my/pbcopy ()
   "Copy to the osx clipboard"
@@ -132,15 +89,6 @@
     (setq mark-ring (nbutlast mark-ring))
     (goto-char (marker-position (car (last mark-ring))))))
 
-
-(defun my/collapse-line-back ()
-  (interactive)
-  (back-to-indentation)
-  (push-mark)
-  (beginning-of-line)
-  (backward-char 1)
-  (delete-region (region-beginning) (region-end))
-  (insert " "))
 
 ;; Toggle between light and dark themes
 (defun my/toggle-theme ()
