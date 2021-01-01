@@ -6,7 +6,7 @@
 (setq column-number-mode t)
 (setq inhibit-startup-message t)
 
-;; Editing improvements: transient-mark, tabs, subword mode
+;; Editing improvements: transient-mark, tabs, subword mode, delete whitespace
 (transient-mark-mode t)
 (setq-default
  indent-tabs-mode nil
@@ -14,6 +14,7 @@
  tab-width 4
  indent-line-function 'insert-tab)
 (global-subword-mode 1)
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;; Make the text size reasonable
 (set-face-attribute 'default nil :height 100)

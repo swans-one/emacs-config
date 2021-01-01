@@ -2,20 +2,20 @@
 ;; mode is loaded.
 
 ;; Global Hooks
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
+;; (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 
 ;; Mode Hooks
 ;;;;;;;;;;;;;
 
 ;; emacs-lisp
-(add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
+;; (add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
 
 ;; scheme
-(add-hook 'scheme-mode-hook 'show-paren-mode)
+;; (add-hook 'scheme-mode-hook 'show-paren-mode)
 
 ;; term
-(add-hook 'term-mode-hook (lambda () (yas-minor-mode -1)))
+;; (add-hook 'term-mode-hook (lambda () (yas-minor-mode -1)))
 
 ;; web
 (defun my/set-php-method-key ()

@@ -56,15 +56,19 @@
                              (org-agenda-files :maxlevel . 6)))
   (setq org-refile-use-outline-path 'file)
   (setq org-completion-use-ido t)
-  (setq org-outline-path-complete-in-steps nil)
+  (setq org-outline-path-complete-in-steps nil))
 
-)
+(use-package show-paren-mode
+  :hook (emacs-lisp-mode scheme-mode))
 
 (use-package uniquify
   :config
   (setq uniquify-buffer-name-style 'post-forward))
 
 (use-package yasnippet
+  :init
+  ;; disable for term-mode
+  (add-hook 'term-mode-hook (lambda () (yas-minor-mode -1)))
   :config
   (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
   (setq yas-prompt-functions '(yas-ido-prompt))
