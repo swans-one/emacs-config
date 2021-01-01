@@ -13,11 +13,15 @@
 ;;     - hooks          = load elisp on major mode loading
 
 
-;; Load Path
-;;;;;;;;;;;;
+;; Load Path / exec path
+;;;;;;;;;;;;;;;;;;;;;;;;
 (setq site-lisp-dir
       (expand-file-name "site-lisp" user-emacs-directory))
 (add-to-list 'load-path site-lisp-dir)
+
+;; Append homebrew binary location to exec-path
+(setq exec-path (append exec-path '("/usr/local/bin")))
+
 
 ;; Aesthetic customizations
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -125,23 +129,9 @@
 (require 'defuns)
 (require 'keybindings)
 
-;; Set exec-path to find homebrew binaries
-(setq exec-path (append exec-path '("/usr/local/bin")))
-
-(defvar mode-cycles
-  (list '(web-mode js2-mode)))
-
 ;; Erik-mode
 ;;;;;;;;;;;;
 (require 'erik-mode)
-
-;; C-mode
-;;;;;;;;;
-
-(setq-default c-default-style "linux"
-              c-basic-offset 4)
-
-
 
 
 
