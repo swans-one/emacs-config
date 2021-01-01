@@ -15,7 +15,6 @@
 
 ;; Load Path
 ;;;;;;;;;;;;
-
 (setq site-lisp-dir
       (expand-file-name "site-lisp" user-emacs-directory))
 (add-to-list 'load-path site-lisp-dir)
@@ -50,6 +49,16 @@
   ;; don't backwards search for files
   (setq ido-auto-merge-work-directories-length -1))
 
+(use-package org
+  :config
+  (setq org-refile-targets '((nil :maxlevel . 6)
+                             (org-agenda-files :maxlevel . 6)))
+  (setq org-refile-use-outline-path 'file)
+  (setq org-completion-use-ido t)
+  (setq org-outline-path-complete-in-steps nil)
+
+)
+
 (use-package uniquify
   :config
   (setq uniquify-buffer-name-style 'post-forward))
@@ -68,8 +77,6 @@
 (require 'keybindings)
 (require 'mode-mappings)
 (require 'hooks)
-(require 'cust-org)
-
 
 
 ;; Use pdflatex to compile LaTeX files

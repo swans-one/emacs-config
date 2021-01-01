@@ -56,3 +56,4 @@
   - [ ] Erik-mode
   - [ ] dcpu16-mode
 - [ ] Move any remaining defuns into erik-mode
+- [ ] Clean up any unused files
