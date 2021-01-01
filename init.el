@@ -50,6 +50,7 @@
   (setq ido-auto-merge-work-directories-length -1))
 
 (use-package org
+  :mode ("\\.org\\'" . org-mode)
   :config
   (setq org-refile-targets '((nil :maxlevel . 6)
                              (org-agenda-files :maxlevel . 6)))
