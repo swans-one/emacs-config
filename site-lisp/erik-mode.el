@@ -46,12 +46,33 @@
   (backward-char 1)
   (delete-region (region-beginning) (region-end))
   (insert " ")
-
   ;; Only need to repeat backspace
   (set-transient-map
    (let ((map (make-sparse-keymap)))
      (define-key map (kbd "<backspace>") 'erik-collapse-line-back)
      map)))
+
+(defun erik-shell-echoes ()
+  "If a shell is echoing input, this fixes it"
+  (interactive)
+  (setq comint-process-echoes t))
+
+
+(defun erik-rename-file-and-buffer (new-name)
+  "Renames both current buffer and file it's visiting to NEW-NAME."
+  (interactive "sNew name: ")
+  (let ((name (buffer-name))
+        (filename (buffer-file-name)))
+    (if (not filename)
+        (message "Buffer '%s' is not visiting a file!" name)
+      (if (get-buffer new-name)
+          (message "A buffer named '%s' already exists!" new-name)
+        (progn
+          (rename-file filename new-name 1)
+          (rename-buffer new-name)
+          (set-visited-file-name new-name)
+          (set-buffer-modified-p nil))))))
+
 
 ;; Org-mode functions
 ;;;;;;;;;;;;;;;;;;;;;
@@ -169,6 +190,17 @@
   (beginning-of-line)
   (forward-line -1))
 
+(defun erik-toggle-theme ()
+  (interactive)
+  (let ((is-light (-contains? custom-enabled-themes default-light-color-theme)))
+    (dolist (theme custom-enabled-themes)
+      (disable-theme theme))
+    (load-theme
+     (if is-light
+         default-dark-color-theme
+       default-light-color-theme))))
+
+
 ;; Keymap
 (defvar erik-mode-map (make-sparse-keymap) "Keymap for erik-mode")
 
@@ -193,6 +225,7 @@
 
 ;; C-j b _ -- Buffer manipulation
 (define-key erik-mode-map (kbd "C-j b r") 'erik-reload-file)
+(define-key erik-mode-map (kbd "C-j b n") 'erik-rename-file-and-buffer)
 
 ;; C-j t _ -- Terminal commands
 (define-key erik-mode-map (kbd "C-j t s") 'erik-term-send-to-shell)
