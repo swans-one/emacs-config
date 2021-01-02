@@ -2,43 +2,42 @@
 
 | Package name       | selected? | customized? | done |
 |--------------------+-----------+-------------+------|
-| yaml-mode          | Yes       |             |      |
-| emmet-mode         | Yes       |             |      |
-| web-mode           | Yes       | Yes         |      |
+| yaml-mode          | Yes       |             | R    |
+| emmet-mode         | Yes       |             | X    |
+| web-mode           | Yes       | Yes         | X    |
 | yasnippet          | Yes       | Yes         | X    |
-| quack              | Yes       |             |      |
-| paredit            | Yes       |             |      |
-| magit              | Yes       | Yes         |      |
-| haskell-mode       | Yes       |             |      |
-| geiser             | Yes       |             |      |
-| expand-region      | Yes       |             |      |
-| dash-functional    | Yes       | No          |      |
-| autopair           | Yes       |             |      |
+| quack              | Yes       |             | R    |
+| paredit            | Yes       |             | R    |
+| magit              | Yes       | Yes         | X    |
+| haskell-mode       | Yes       |             | R    |
+| geiser             | Yes       |             | R    |
+| expand-region      | Yes       |             | R    |
+| dash-functional    | Yes       | No          | X    |
 | ido                | No        | Yes         | X    |
 | uniquify           | No        | Yes         | X    |
-| autopair           | No        | Yes         |      |
-| c-mode             | No        | Yes         |      |
-| purescript-mode    | No        | Yes         |      |
-| dcpu16-mode        |           |             |      |
-| puppet-mode        |           |             |      |
-| markdown-mode      |           | Yes         |      |
-| rainbow-delimiters |           |             |      |
-| window.el          |           | Yes         |      |
-| ffap               |           | Yes         |      |
-| electric           |           | Yes         |      |
-| html-mode          |           | Yes         |      |
-| python-mode        |           | Yes         |      |
-| term               |           | Yes         |      |
-| octave-mode        |           |             |      |
-| files              |           | Yes         |      |
-| emacs-lisp-mode    |           | Yes         |      |
-| scheme-mode        |           | Yes         |      |
-| term-mode          |           | Yes         |      |
+| autopair           | No        | Yes         | X    |
+| c-mode             | No        | Yes         | R    |
+| purescript-mode    | No        | Yes         | R    |
+| dcpu16-mode        |           |             | X    |
+| puppet-mode        |           |             | R    |
+| markdown-mode      |           | Yes         | X    |
+| rainbow-delimiters |           |             | R    |
+| window.el          |           | Yes         | R    |
+| ffap               |           | Yes         | R    |
+| electric           |           | Yes         | R    |
+| html-mode          |           | Yes         | R    |
+| python-mode        |           | Yes         | R    |
+| term               |           | Yes         | R    |
+| octave-mode        |           |             | R    |
+| files              |           | Yes         | R    |
+| emacs-lisp-mode    |           | Yes         | X    |
+| scheme-mode        |           | Yes         | X    |
+| term-mode          |           | Yes         | X    |
 
 
 * My Code
 
-** Todos [2/6]
+** Todos [8/8]
 - [X] Take inventory of existing customization (add to table above)
   - [X] site-lisp/customize.el
   - [X] site-lisp/defuns.el
@@ -47,13 +46,14 @@
   - [X] site-lisp/hooks.el
   - [X] site-lisp/cust-org.el
 - [X] Figure out how to install use-package / get it running
-- [-] Do three test packages configurations:
+- [X] Do three test packages configurations:
   - [X] yasnippet
   - [X] ido
-  - [ ] org
-- [ ] Convert all other packages in the table to use-package
-- [ ] Incorporate site-lisp packages:
-  - [ ] Erik-mode
-  - [ ] dcpu16-mode
-- [ ] Move any remaining defuns into erik-mode
-- [ ] Clean up any unused files
+  - [X] org
+- [X] Convert all other packages in the table to use-package
+- [X] Incorporate site-lisp packages:
+  - [X] Erik-mode
+  - [X] dcpu16-mode
+- [X] Add :ensure to relevant packages
+- [X] Move any remaining defuns into erik-mode
+- [X] Clean up any unused files
