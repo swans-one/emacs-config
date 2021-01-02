@@ -1,0 +1,26 @@
+* Emacs Configuration
+
+My ~emacs.d~. Organization:
+
+- init.el :: entry point & use-package declarations
+- lisp/ :: Other lisp
+  - customize.el :: simple base configration, not using packages
+  - modes/ :: modes I've written
+    - erik-mode.el :: My minor modes
+- snippets/ :: Directory for yasnippet snippets
+- themes/ :: Directory for custom themes
+
+Basic appearance and behaviour customization is done in the
+~lisp/customize.el~ file. This file should only rely on built-in functions
+/ customization and is loaded early in the init process. This means
+having a familiar setup even if something later in the init process
+breaks.
+
+Most customizations to packages, both externally loaded and built-in
+should be done through ~use-package~ declarations in the init.el file,
+after ~lisp/customize.el~ is required.
+
+Additional functionality that I've written is included in a custom
+globalized minor-mode ~erik-mode~. This includes rebinding some global
+keys, but also making a key-map with the prefix ~C-j~ that includes a
+bunch of keybindings and other key maps.
