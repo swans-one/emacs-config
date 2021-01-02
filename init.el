@@ -46,6 +46,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package autopair
+  :ensure t
   :demand t
   :init
   (add-hook 'web-mode-hook (lambda () (autopair-mode -1)))
@@ -56,9 +57,10 @@
   :ensure t)
 
 (use-package emmet-mode
+  :ensure t
   :hook (web-mode sgml-mode))
 
-(use-package ido
+(use-package ido ;; built-in
   :init (ido-mode t)
   :config
   (setq ido-enable-flex-matching t)
@@ -73,7 +75,7 @@
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode)))
 
-(use-package org
+(use-package org ;; built-in
   :mode ("\\.org\\'" . org-mode)
   :config
   (setq org-refile-targets '((nil :maxlevel . 6)
@@ -82,14 +84,14 @@
   (setq org-completion-use-ido t)
   (setq org-outline-path-complete-in-steps nil))
 
-(use-package show-paren-mode
+(use-package show-paren-mode ;; built-in
   :hook (emacs-lisp-mode scheme-mode))
 
-(use-package term
+(use-package term ;; built in
   :config
   (define-key term-raw-map (kbd "C-c C-y") 'term-paste))
 
-(use-package tex-mode
+(use-package tex-mode ;; built in
   :mode "\\.tex\\'"
   :config
   (setq latex-run-command "pdflatex")
@@ -100,11 +102,13 @@
                   (getenv "PATH")))
   )
 
-(use-package uniquify
+(use-package uniquify-files
+  :ensure t
   :config
   (setq uniquify-buffer-name-style 'post-forward))
 
 (use-package web-mode
+  :ensure t
   :mode (("\\.html?\\'" . web-mode)
          ("\\.js[x]?\\'" . web-mode)
          ("\\.svelte\\'" . web-mode))
@@ -121,6 +125,7 @@
   )
 
 (use-package yasnippet
+  :enusre t
   :init
   ;; disable for term-mode
   (add-hook 'term-mode-hook (lambda () (yas-minor-mode -1)))
@@ -130,15 +135,9 @@
   (yas-global-mode 1))
 
 
-;; Requires
-;;;;;;;;;;;
-
-(require 'defuns)
-
 ;; Erik-mode
 ;;;;;;;;;;;;
 (require 'erik-mode)
-
 
 
 (custom-set-variables
