@@ -15,9 +15,8 @@
 
 ;; Load Path / exec path
 ;;;;;;;;;;;;;;;;;;;;;;;;
-(setq site-lisp-dir
-      (expand-file-name "site-lisp" user-emacs-directory))
-(add-to-list 'load-path site-lisp-dir)
+(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+(add-to-list 'load-path (expand-file-name "lisp/modes" user-emacs-directory))
 
 ;; Append homebrew binary location to exec-path
 (setq exec-path (append exec-path '("/usr/local/bin")))
@@ -60,6 +59,10 @@
   :ensure t
   :hook (web-mode sgml-mode))
 
+(use-package erik-mode
+  :config
+  (erik-mode))
+
 (use-package ido ;; built-in
   :init (ido-mode t)
   :config
@@ -67,6 +70,9 @@
   (setq ido-everywhere t)
   ;; don't backwards search for files
   (setq ido-auto-merge-work-directories-length -1))
+
+(use-package magit
+  :ensure t)
 
 (use-package markdown-mode
   :ensure t
@@ -125,7 +131,7 @@
   )
 
 (use-package yasnippet
-  :enusre t
+  :ensure t
   :init
   ;; disable for term-mode
   (add-hook 'term-mode-hook (lambda () (yas-minor-mode -1)))
@@ -133,11 +139,6 @@
   (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
   (setq yas-prompt-functions '(yas-ido-prompt))
   (yas-global-mode 1))
-
-
-;; Erik-mode
-;;;;;;;;;;;;
-(require 'erik-mode)
 
 
 (custom-set-variables
