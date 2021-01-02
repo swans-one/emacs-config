@@ -44,22 +44,25 @@
 ;; Package Configuration
 ;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package autopair
-  :ensure t
-  :demand t
-  :init
-  (add-hook 'web-mode-hook (lambda () (autopair-mode -1)))
-  :config
-  (autopair-global-mode))
-
 (use-package dash
   :ensure t)
+
+(use-package elec-pair
+  :demand t
+  :config
+  (electric-pair-mode)
+  (defvar markdown-pairs '((?~ . ?~)))
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (setq-local electric-pair-pairs
+                          (append electric-pair-pairs markdown-pairs)))))
 
 (use-package emmet-mode
   :ensure t
   :hook (web-mode sgml-mode))
 
 (use-package erik-mode
+  :demand t
   :config
   (erik-mode))
 
