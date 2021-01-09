@@ -91,6 +91,64 @@
   (yank)
   (insert "]"))
 
+(defun erik-org-publish-wiki (base-dir target-dir)
+  "Publish the contents of a directory to a wiki format at the
+  target location"
+  (interactive "DBase Directory: \nDOutput Directory: ")
+  (setq org-publish-project-alist
+        `(("orgfiles"
+           :base-directory ,base-dir
+           :base-extension "org"
+           :headline-levels 3
+           :html-doctype "<!DOCTYPE html>"
+           :html-head
+           ,(string-join
+             '("<link rel=\"stylesheet\""
+               "      type=\"text/css\""
+               "      href=\"/css/styles.css\""
+               "/>"
+               "")
+             "\n")
+           :html-head-include-default-style nil
+           :html-head-include-scripts nil
+           :html-html5-fancy t
+           :html-inline-images t
+           :html-preamble nil
+           :html-postable nil
+           :html-validation-link nil
+           :publishing-directory ,target-dir
+           :publishing-function org-html-publish-to-html
+           :section-numbers nil
+           :time-stamp-file nil
+           :with-author nil
+           :with-creator nil
+           :with-date nil
+           :with-email nil
+           :with-timestamps nil
+           :with-title nil
+           :with-toc nil)
+          ("static"
+           :base-directory ,(concat base-dir "/static")
+           :base-extension ".*"
+           :publishing-directory ,(concat target-dir "/static")
+           :publishing-function org-publish-attachment)
+          ("js"
+           :base-directory ,(concat base-dir "/js")
+           :base-extension "js\\|jsx"
+           :publishing-directory ,(concat target-dir "/js")
+           :publishing-function org-publish-attachment)
+          ("css"
+           :base-directory ,(concat base-dir "/css")
+           :base-extension "css"
+           :publishing-directory ,(concat target-dir "/css")
+           :publishing-function org-publish-attachment)
+          ("wiki" :components ("orgfiles" "static" "js" "css"))))
+  (message base-dir)
+  (message target-dir)
+  (message "%s" org-publish-project-alist)
+  (org-publish "wiki")
+)
+
 ;; Buffer Functions
 ;;;;;;;;;;;;;;;;;;;
 
@@ -237,6 +295,7 @@
 
 ;; C-j o _ -- org mode stuff
 (define-key erik-mode-map (kbd "C-j o l") 'erik-md-to-org-link)
+(define-key erik-mode-map (kbd "C-j o p") 'erik-org-publish-wiki)
 
 ;; Binding functions I didn't write
 (define-key erik-mode-map (kbd "C-j C-j") 'ido-select-text)
