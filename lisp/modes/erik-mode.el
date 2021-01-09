@@ -95,6 +95,24 @@
   "Publish the contents of a directory to a wiki format at the
   target location"
   (interactive "DBase Directory: \nDOutput Directory: ")
+  ;; Dynamic binding allows us to override this definition. We do
+  ;; mostly the same thing, but we introduce an additional wrapper div
+  ;; around the main content. This will make reflowing with grid
+  ;; easier.
+  ;;
+  ;; TODO: Instead of binding over this function, create a derived
+  ;; backend of the html backend, which just replaces this function.
+  (defun org-html-inner-template (contents info)
+    (concat
+     ;; Table of contents.
+     (let ((depth (plist-get info :with-toc)))
+       (when depth (org-html-toc depth info)))
+     ;; Document contents.
+     "<div id=contents-main>"
+     contents
+     "</div>"
+     ;; Footnotes section.
+     (org-html-footnote-section info)))
   (setq org-publish-project-alist
         `(("orgfiles"
            :base-directory ,base-dir
@@ -112,8 +130,15 @@
            :html-head-include-default-style nil
            :html-head-include-scripts nil
            :html-html5-fancy t
+           :html-indent nil ;; indenting will mess with <pre> tags
            :html-inline-images t
-           :html-preamble nil
+           :html-preamble
+           ,(string-join
+             '("<nav>"
+               "<a href=\"/\">Home</a>"
+               "</nav>"
+               )
+             "\n")
            :html-postable nil
            :html-validation-link nil
            :publishing-directory ,target-dir
@@ -125,8 +150,9 @@
            :with-date nil
            :with-email nil
            :with-timestamps nil
-           :with-title nil
-           :with-toc nil)
+           :with-title t
+           ; :with-toc nil
+           )
           ("static"
            :base-directory ,(concat base-dir "/static")
            :base-extension ".*"
