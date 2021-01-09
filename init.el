@@ -66,9 +66,13 @@
   :config
   (erik-mode))
 
+(use-package htmlize
+  :ensure t
+  :defer t)
+
 (use-package ido ;; built-in
-  :init (ido-mode t)
-  :config
+  :init
+  (ido-mode t)
   (setq ido-enable-flex-matching t)
   (setq ido-everywhere t)
   ;; don't backwards search for files
@@ -92,6 +96,10 @@
   (setq org-refile-use-outline-path 'file)
   (setq org-completion-use-ido t)
   (setq org-outline-path-complete-in-steps nil))
+
+(use-package paredit
+  :ensure t
+  :hook (emacs-lisp-mode paredit-mode))
 
 (use-package show-paren-mode ;; built-in
   :hook (emacs-lisp-mode scheme-mode))
@@ -156,7 +164,7 @@
  '(electric-indent-mode nil)
  '(package-selected-packages
    (quote
-    (use-package gnu-elpa-keyring-update yaml-mode emmet-mode web-mode yasnippet quack paredit magit haskell-mode geiser expand-region dash-functional autopair))))
+    (htmlize use-package gnu-elpa-keyring-update yaml-mode emmet-mode web-mode yasnippet quack paredit magit haskell-mode geiser expand-region dash-functional autopair))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
