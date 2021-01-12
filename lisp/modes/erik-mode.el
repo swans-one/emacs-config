@@ -11,6 +11,52 @@
           (car list)
         (first-matching pattern (cdr list)))))
 
+;; Config-file utilties
+;;   - Find a project-level config from the current file
+;;   - Read and parse that file
+;;   - Use the values, or prompt
+(defun find-project-config (config-name &optional current-location)
+  "Find a config file upwards in the directory tree. CONFIG-NAME
+is a file name to search upwards in the directory tree
+for. CURRENT-LOCATION is a directory to search upward from, it
+defaults to the file of the current buffer"
+  (cond ((null (or current-location (buffer-file-name))) nil)
+        ((null current-location)
+         (find-project-config config-name (buffer-file-name)))
+        (t (let* ((up (parent current-location))
+                  (config-file (concat up config-name)))
+             (cond ((null current-location) nil)
+                   ((file-readable-p config-file) config-file)
+                   ((string= up "/") nil)
+                   (t (find-project-config config-name up)))))))
+
+(defun config-blank-p (s) (string= (string-trim-right s) ""))
+(defun config-comment-p (s) (string-prefix-p "#" s))
+(defun parse-config-lines (lines alist)
+  "Parse a list of strings in key=value format into an alist"
+  (let* ((first (car lines))
+         (pair (split-string first "="))
+         (key (car pair))
+         (value (cadr pair)))
+    (if (null (cdr lines))
+        (cons (cons key value) alist)
+      (parse-config-lines (cdr lines) (cons (cons key value) alist)))))
+
+(defun read-config-file (filename)
+  "Read in a ini style config file into an alist FILENAME
+should point to a file with each line containing key-value pairs
+in the ini format \"key=val\". Empty lines and lines starting
+with # will be ignored."
+  (let* ((file-contents (with-temp-buffer
+                          (insert-file-contents filename)
+                          (buffer-string)))
+         (file-lines (split-string file-contents "\n"))
+         (config-lines (-reject
+                        (-orfn 'config-comment-p 'config-blank-p)
+                        file-lines)))
+    (parse-config-lines config-lines '())
+    ))
+
 
 ;; One-Off Functions
 ;;;;;;;;;;;;;;;;;;;;

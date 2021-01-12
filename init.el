@@ -47,6 +47,9 @@
 (use-package dash
   :ensure t)
 
+(use-package dash-functional
+  :ensure t)
+
 (use-package elec-pair
   :demand t
   :config
