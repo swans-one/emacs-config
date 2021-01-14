@@ -187,69 +187,69 @@ the directory of the config file."
           '(("src-dir" . (lambda () (read-directory-name "Src dir: ")))
             ("target-dir" . (lambda () (read-directory-name "Target dir: ")))))
          (config (config-or-prompt config-file-alist prompts)))
+
     (message "%s" config)
     (message (cdr (assoc "src-dir" config))) ;; Todo: fix path implementation
     (message (cdr (assoc "target-dir" config)))
-    (setq org-publish-project-alist
-          `(("orgfiles"
-             :base-directory ,(cdr (assoc "src-dir" config))
-             :base-extension "org"
-             :headline-levels 3
-             :html-doctype "<!DOCTYPE html>"
-             :html-head
-             ,(string-join
-               '("<link rel=\"stylesheet\""
-                 "      type=\"text/css\""
-                 "      href=\"/css/styles.css\""
-                 "/>"
-                 "")
-               "\n")
-             :html-head-include-default-style nil
-             :html-head-include-scripts nil
-             :html-html5-fancy t
-             :html-indent nil ;; indenting will mess with <pre> tags
-             :html-inline-images t
-             :html-preamble
-             ,(string-join
-               '("<nav>"
-                 "<a href=\"/\">Home</a>"
-                 "</nav>"
-                 )
-               "\n")
-             :html-postable nil
-             :html-validation-link nil
-             :publishing-directory ,(cdr (assoc "target-dir" config))
-             :publishing-function org-html-publish-to-html
-             :section-numbers nil
-             :time-stamp-file nil
-             :with-author nil
-             :with-creator nil
-             :with-date nil
-             :with-email nil
-             :with-timestamps nil
-             :with-title t
+    (cl-flet ((config-val (lambda (key) (cdr (assoc key config)))))
+      (setq org-publish-project-alist
+            `(("orgfiles"
+               :base-directory ,(config-val "src-dir")
+               :base-extension "org"
+               :headline-levels 3
+               :html-doctype "<!DOCTYPE html>"
+               :html-head
+               ,(string-join
+                 '("<link rel=\"stylesheet\""
+                   "      type=\"text/css\""
+                   "      href=\"/css/styles.css\""
+                   "/>"
+                   "")
+                 "\n")
+               :html-head-include-default-style nil
+               :html-head-include-scripts nil
+               :html-html5-fancy t
+               :html-indent nil ;; indenting will mess with <pre> tags
+               :html-inline-images t
+               :html-preamble
+               ,(string-join
+                 '("<nav>"
+                   "<a href=\"/\">Home</a>"
+                   "</nav>"
+                   )
+                 "\n")
+               :html-postable nil
+               :html-validation-link nil
+               :publishing-directory ,(config-val "target-dir")
+               :publishing-function org-html-publish-to-html
+               :section-numbers nil
+               :time-stamp-file nil
+               :with-author nil
+               :with-creator nil
+               :with-date nil
+               :with-email nil
+               :with-timestamps nil
+               :with-title t
                                         ; :with-toc nil
-             )
-            ("static"
-             :base-directory
-             ,(concat (cdr (assoc "base-dir" config)) "/static")
-             :base-extension ".*"
-             :publishing-directory
-             ,(concat (cdr (assoc "target-dir" config)) "/static")
-             :publishing-function org-publish-attachment)
-            ("js"
-             :base-directory ,(concat (cdr (assoc "base-dir" config)) "/js")
-             :base-extension "js\\|jsx"
-             :publishing-directory
-             ,(concat (cdr (assoc "target-dir" config)) "/js")
-             :publishing-function org-publish-attachment)
-            ("css"
-             :base-directory ,(concat (cdr (assoc "base-dir" config)) "/css")
-             :base-extension "css"
-             :publishing-directory
-             ,(concat (cdr (assoc "target-dir" config)) "/css")
-             :publishing-function org-publish-attachment)
-            ("wiki" :components ("orgfiles" "static" "js" "css"))))
+               )
+              ("static"
+               :base-directory
+               ,(concat (config-val "base-dir") "/static")
+               :base-extension ".*"
+               :publishing-directory
+               ,(concat (config-val "target-dir") "/static")
+               :publishing-function org-publish-attachment)
+              ("js"
+               :base-directory ,(concat (config-val "base-dir") "/js")
+               :base-extension "js\\|jsx"
+               :publishing-directory ,(concat (config-val "target-dir") "/js")
+               :publishing-function org-publish-attachment)
+              ("css"
+               :base-directory ,(concat (config-val "base-dir") "/css")
+               :base-extension "css"
+               :publishing-directory ,(concat (config-val "target-dir") "/css")
+               :publishing-function org-publish-attachment)
+              ("wiki" :components ("orgfiles" "static" "js" "css")))))
     (org-publish "wiki")))
 
 ;; Buffer Functions
