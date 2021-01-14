@@ -11,6 +11,8 @@
           (car list)
         (first-matching pattern (cdr list)))))
 
+(defun parent (loc) (file-name-directory (directory-file-name loc)))
+
 ;; Config-file utilties
 ;;   - Find a project-level config from the current file
 ;;   - Read and parse that file
@@ -43,19 +45,37 @@ defaults to the file of the current buffer"
       (parse-config-lines (cdr lines) (cons (cons key value) alist)))))
 
 (defun read-config-file (filename)
-  "Read in a ini style config file into an alist FILENAME
-should point to a file with each line containing key-value pairs
-in the ini format \"key=val\". Empty lines and lines starting
-with # will be ignored."
-  (let* ((file-contents (with-temp-buffer
+  "Read in a ini style config file into an alist FILENAME should
+point to a file with each line containing key-value pairs in the
+ini format \"key=val\". Empty lines and lines starting with #
+will be ignored. Values starting with ./ have the ./ replaced by
+the directory of the config file."
+  (let* ((directory-name (parent filename))
+         (file-contents (with-temp-buffer
                           (insert-file-contents filename)
                           (buffer-string)))
          (file-lines (split-string file-contents "\n"))
          (config-lines (-reject
                         (-orfn 'config-comment-p 'config-blank-p)
                         file-lines)))
-    (parse-config-lines config-lines '())
+    (-map (lambda (pair)
+            (-let (((key . val) pair))
+              (cons key (replace-regexp-in-string "^\./" directory-name val))))
+          (parse-config-lines config-lines '()))
     ))
+
+(defun config-or-prompt (config-alist prompt-alist &optional out-alist)
+  "For each prompt, first check if the key is in config-alist,
+  otherwise prompt the user for a value. Returns a alist."
+  (let* ((key (caar prompt-alist))
+         (fn (cdar prompt-alist))
+         (prompt-rest (cdr prompt-alist))
+         (config-val (cdr (assoc key config-alist)))
+         (val (if config-val config-val (funcall fn)))
+         (out-alist (cons (cons key val) out-alist)))
+    (if (null prompt-rest)
+        out-alist
+      (config-or-prompt config-alist prompt-rest out-alist))))
 
 
 ;; One-Off Functions
@@ -137,10 +157,10 @@ with # will be ignored."
   (yank)
   (insert "]"))
 
-(defun erik-org-publish-wiki (base-dir target-dir)
+(defun erik-org-publish-wiki ()
   "Publish the contents of a directory to a wiki format at the
   target location"
-  (interactive "DBase Directory: \nDOutput Directory: ")
+  (interactive)
   ;; Dynamic binding allows us to override this definition. We do
   ;; mostly the same thing, but we introduce an additional wrapper div
   ;; around the main content. This will make reflowing with grid
@@ -159,67 +179,78 @@ with # will be ignored."
      "</div>"
      ;; Footnotes section.
      (org-html-footnote-section info)))
-  (setq org-publish-project-alist
-        `(("orgfiles"
-           :base-directory ,base-dir
-           :base-extension "org"
-           :headline-levels 3
-           :html-doctype "<!DOCTYPE html>"
-           :html-head
-           ,(string-join
-             '("<link rel=\"stylesheet\""
-               "      type=\"text/css\""
-               "      href=\"/css/styles.css\""
-               "/>"
-               "")
-             "\n")
-           :html-head-include-default-style nil
-           :html-head-include-scripts nil
-           :html-html5-fancy t
-           :html-indent nil ;; indenting will mess with <pre> tags
-           :html-inline-images t
-           :html-preamble
-           ,(string-join
-             '("<nav>"
-               "<a href=\"/\">Home</a>"
-               "</nav>"
-               )
-             "\n")
-           :html-postable nil
-           :html-validation-link nil
-           :publishing-directory ,target-dir
-           :publishing-function org-html-publish-to-html
-           :section-numbers nil
-           :time-stamp-file nil
-           :with-author nil
-           :with-creator nil
-           :with-date nil
-           :with-email nil
-           :with-timestamps nil
-           :with-title t
-           ; :with-toc nil
-           )
-          ("static"
-           :base-directory ,(concat base-dir "/static")
-           :base-extension ".*"
-           :publishing-directory ,(concat target-dir "/static")
-           :publishing-function org-publish-attachment)
-          ("js"
-           :base-directory ,(concat base-dir "/js")
-           :base-extension "js\\|jsx"
-           :publishing-directory ,(concat target-dir "/js")
-           :publishing-function org-publish-attachment)
-          ("css"
-           :base-directory ,(concat base-dir "/css")
-           :base-extension "css"
-           :publishing-directory ,(concat target-dir "/css")
-           :publishing-function org-publish-attachment)
-          ("wiki" :components ("orgfiles" "static" "js" "css"))))
-  (message base-dir)
-  (message target-dir)
-  (message "%s" org-publish-project-alist)
-  (org-publish "wiki")
-)
+
+  (let* ((config-file-name (find-project-config "publish.conf"))
+         (config-file-alist
+          (if config-file-name (read-config-file config-file-name) '()))
+         (prompts
+          '(("src-dir" . (lambda () (read-directory-name "Src dir: ")))
+            ("target-dir" . (lambda () (read-directory-name "Target dir: ")))))
+         (config (config-or-prompt config-file-alist prompts)))
+    (message "%s" config)
+    (message (cdr (assoc "src-dir" config))) ;; Todo: fix path implementation
+    (message (cdr (assoc "target-dir" config)))
+    (setq org-publish-project-alist
+          `(("orgfiles"
+             :base-directory ,(cdr (assoc "src-dir" config))
+             :base-extension "org"
+             :headline-levels 3
+             :html-doctype "<!DOCTYPE html>"
+             :html-head
+             ,(string-join
+               '("<link rel=\"stylesheet\""
+                 "      type=\"text/css\""
+                 "      href=\"/css/styles.css\""
+                 "/>"
+                 "")
+               "\n")
+             :html-head-include-default-style nil
+             :html-head-include-scripts nil
+             :html-html5-fancy t
+             :html-indent nil ;; indenting will mess with <pre> tags
+             :html-inline-images t
+             :html-preamble
+             ,(string-join
+               '("<nav>"
+                 "<a href=\"/\">Home</a>"
+                 "</nav>"
+                 )
+               "\n")
+             :html-postable nil
+             :html-validation-link nil
+             :publishing-directory ,(cdr (assoc "target-dir" config))
+             :publishing-function org-html-publish-to-html
+             :section-numbers nil
+             :time-stamp-file nil
+             :with-author nil
+             :with-creator nil
+             :with-date nil
+             :with-email nil
+             :with-timestamps nil
+             :with-title t
+                                        ; :with-toc nil
+             )
+            ("static"
+             :base-directory
+             ,(concat (cdr (assoc "base-dir" config)) "/static")
+             :base-extension ".*"
+             :publishing-directory
+             ,(concat (cdr (assoc "target-dir" config)) "/static")
+             :publishing-function org-publish-attachment)
+            ("js"
+             :base-directory ,(concat (cdr (assoc "base-dir" config)) "/js")
+             :base-extension "js\\|jsx"
+             :publishing-directory
+             ,(concat (cdr (assoc "target-dir" config)) "/js")
+             :publishing-function org-publish-attachment)
+            ("css"
+             :base-directory ,(concat (cdr (assoc "base-dir" config)) "/css")
+             :base-extension "css"
+             :publishing-directory
+             ,(concat (cdr (assoc "target-dir" config)) "/css")
+             :publishing-function org-publish-attachment)
+            ("wiki" :components ("orgfiles" "static" "js" "css"))))
+    (org-publish "wiki")))
 
 ;; Buffer Functions
 ;;;;;;;;;;;;;;;;;;;
