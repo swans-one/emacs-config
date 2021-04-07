@@ -93,6 +93,8 @@
 
 (use-package org ;; built-in
   :mode ("\\.org\\'" . org-mode)
+  :bind
+  (:map org-mode-map ("C-c l" . 'org-store-link))
   :config
   (setq org-refile-targets '((nil :maxlevel . 6)
                              (org-agenda-files :maxlevel . 6)))
