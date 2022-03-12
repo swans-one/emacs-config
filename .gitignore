@@ -20,3 +20,5 @@ ido.last
 tramp
 transient
 session.*
+.lsp-session*
+network-security.data

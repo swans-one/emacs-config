@@ -81,6 +81,12 @@
   ;; don't backwards search for files
   (setq ido-auto-merge-work-directories-length -1))
 
+(use-package lsp-mode
+  :ensure t
+  :init
+  :hook (rust-mode . lsp)
+  :commands lsp)
+
 (use-package magit
   :ensure t)
 
@@ -105,6 +111,10 @@
 (use-package paredit
   :ensure t
   :hook (emacs-lisp-mode paredit-mode))
+
+(use-package rust-mode
+  :ensure t
+  :mode "\\.rs\\'")
 
 (use-package show-paren-mode ;; built-in
   :hook (emacs-lisp-mode scheme-mode))
@@ -169,7 +179,7 @@
  '(electric-indent-mode nil)
  '(package-selected-packages
    (quote
-    (htmlize use-package gnu-elpa-keyring-update yaml-mode emmet-mode web-mode yasnippet quack paredit magit haskell-mode geiser expand-region dash-functional autopair))))
+    (lsp-mode rust-mode htmlize use-package gnu-elpa-keyring-update yaml-mode emmet-mode web-mode yasnippet quack paredit magit haskell-mode geiser expand-region dash-functional autopair))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
