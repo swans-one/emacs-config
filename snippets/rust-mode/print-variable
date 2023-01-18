@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: print variable
+# key: pv
+# --
+println!("${1:$(identity yas-text)} - {:?}", $1);$0

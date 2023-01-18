@@ -69,6 +69,12 @@
   :config
   (erik-mode))
 
+(use-package flycheck
+  :ensure t
+  :config
+  (setq flycheck-check-syntax-automatically '(save))
+  (setq flycheck-disabled-checkers '(rust-cargo)))
+
 (use-package htmlize
   :ensure t
   :defer t)
@@ -83,9 +89,17 @@
 
 (use-package lsp-mode
   :ensure t
-  :init
   :hook (rust-mode . lsp)
+  :config
+  (setq lsp-headerline-breadcrumb-enable nil)
+  (setq lsp-diagnostics-provider :flycheck)
+  (setq lsp-modeline-diagnostics-enable nil)
+  (setq lsp-modeline-workspace-status-enable nil)
+  (define-key lsp-mode-map (kbd "M-l") lsp-command-map)
   :commands lsp)
+
+(use-package lsp-ui
+  :ensure t)
 
 (use-package magit
   :ensure t)
@@ -108,13 +122,11 @@
   (setq org-completion-use-ido t)
   (setq org-outline-path-complete-in-steps nil))
 
-(use-package paredit
-  :ensure t
-  :hook (emacs-lisp-mode paredit-mode))
-
 (use-package rust-mode
   :ensure t
-  :mode "\\.rs\\'")
+  :mode "\\.rs\\'"
+  :config
+  (add-hook 'rust-mode-hook #'electric-indent-local-mode))
 
 (use-package show-paren-mode ;; built-in
   :hook (emacs-lisp-mode scheme-mode))
@@ -179,7 +191,7 @@
  '(electric-indent-mode nil)
  '(package-selected-packages
    (quote
-    (lsp-mode rust-mode htmlize use-package gnu-elpa-keyring-update yaml-mode emmet-mode web-mode yasnippet quack paredit magit haskell-mode geiser expand-region dash-functional autopair))))
+    (lsp-ui flycheck lsp-mode rust-mode htmlize use-package gnu-elpa-keyring-update yaml-mode emmet-mode web-mode yasnippet quack paredit magit haskell-mode geiser expand-region dash-functional autopair))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
