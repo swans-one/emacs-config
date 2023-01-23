@@ -17,7 +17,7 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;; Make the text size reasonable
-(set-face-attribute 'default nil :height 100)
+(set-face-attribute 'default nil :height 120)
 
 ;; Visible Bell instead of Audible bell
 (defun my-terminal-visible-bell ()
