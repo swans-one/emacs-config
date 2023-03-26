@@ -55,10 +55,15 @@
   :config
   (electric-pair-mode)
   (defvar markdown-pairs '((?~ . ?~)))
+  (defvar web-mode-pairs '((?' . ?')))
   (add-hook 'org-mode-hook
             (lambda ()
               (setq-local electric-pair-pairs
-                          (append electric-pair-pairs markdown-pairs)))))
+                          (append electric-pair-pairs markdown-pairs))))
+  (add-hook 'web-mode-hook
+            (lambda ()
+              (setq-local electric-pair-pairs
+                          (append electric-pair-pairs web-mode-pairs)))))
 
 (use-package emmet-mode
   :ensure t
