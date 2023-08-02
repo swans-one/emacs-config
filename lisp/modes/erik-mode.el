@@ -313,6 +313,7 @@ the directory of the config file."
                                (mapcar (lambda (x)
                                          (format "%s" x)) (buffer-list)))))
         (select-window new-window)
+        (set-window-dedicated-p new-window "ansi")
         (if recent-ansi-term ;; nil if none are open
             (set-window-buffer new-window recent-ansi-term)
           (ansi-term "/bin/bash"))))))
@@ -368,6 +369,8 @@ the directory of the config file."
 ;; Full overrides
 (define-key erik-mode-map (kbd "M-Q") 'erik-unfill-paragraph)
 (define-key erik-mode-map (kbd "C-o") 'other-window)
+(define-key erik-mode-map (kbd "C-S-o")
+  (lambda () (interactive) (other-window -1)))
 (define-key erik-mode-map (kbd "C-c C-f") 'find-file-at-point)
 (define-key erik-mode-map (kbd "<C-return>") 'electric-newline-and-maybe-indent)
 (define-key erik-mode-map (kbd "C-x C-g") 'magit-status)
