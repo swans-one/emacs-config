@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: tailwind-cdn
+# key: tailwind
+# --
+<script src="https://cdn.tailwindcss.com"></script>
