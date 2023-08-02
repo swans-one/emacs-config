@@ -127,6 +127,9 @@
   (setq org-completion-use-ido t)
   (setq org-outline-path-complete-in-steps nil))
 
+(use-package pyvenv
+  :ensure t)
+
 (use-package rust-mode
   :ensure t
   :mode "\\.rs\\'"
@@ -173,6 +176,9 @@
         web-mode-block-padding 2)
   )
 
+(use-package yaml-mode
+  :ensure t)
+
 (use-package yasnippet
   :ensure t
   :init
@@ -196,7 +202,7 @@
  '(electric-indent-mode nil)
  '(package-selected-packages
    (quote
-    (lsp-ui flycheck lsp-mode rust-mode htmlize use-package gnu-elpa-keyring-update yaml-mode emmet-mode web-mode yasnippet quack paredit magit haskell-mode geiser expand-region dash-functional autopair))))
+    (neotree pyvenv lsp-ui flycheck lsp-mode rust-mode htmlize use-package gnu-elpa-keyring-update yaml-mode emmet-mode web-mode yasnippet quack paredit magit haskell-mode geiser expand-region dash-functional autopair))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
