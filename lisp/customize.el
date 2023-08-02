@@ -33,6 +33,7 @@
       `((".*" . ,user-temporary-file-directory)))
 (setq auto-save-file-name-transforms
       `((".*" ,user-temporary-file-directory t)))
+(setq auto-save-list-file-prefix user-temporary-file-directory)
 
 ;; Custom options for `C-u M-x ps-print-buffer-with-faces`
 (setq ps-print-header nil)
