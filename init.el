@@ -56,7 +56,12 @@
   ;; Disable flymake by default. Can enable with ~M-x flymake-mode~
   (eglot-managed-mode . (lambda () (flymake-mode -1)))
   :config
-  (setq eglot-extend-to-xref t))
+  ;; When using xref, still have eglot active in the followed location
+  (setq eglot-extend-to-xref t)
+  ;; Activate the node environment where the language server is installed
+  ;; TODO: have this be project specific / configurable
+  (nvm-use "v18.15.0")
+  (add-to-list 'eglot-server-programs '(web-mode . ("typescript-language-server" "--stdio"))))
 
 (use-package elec-pair
   :demand t
@@ -126,6 +131,9 @@
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode)))
 
+(use-package nvm
+  :ensure t)
+
 (use-package org ;; built-in
   :mode ("\\.org\\'" . org-mode)
   :bind
@@ -173,7 +181,8 @@
   :ensure t
   :mode (("\\.html?\\'" . web-mode)
          ("\\.js[x]?\\'" . web-mode)
-         ("\\.svelte\\'" . web-mode))
+         ("\\.svelte\\'" . web-mode)
+         ("\\.ts\\'" . web-mode))
   :config
   (setq web-mode-enable-auto-closing t
         web-mode-enable-auto-pairing t
@@ -212,7 +221,7 @@
  '(electric-indent-mode nil)
  '(package-selected-packages
    (quote
-    (eglot neotree pyvenv lsp-ui flycheck lsp-mode rust-mode htmlize use-package gnu-elpa-keyring-update yaml-mode emmet-mode web-mode yasnippet quack paredit magit haskell-mode geiser expand-region dash-functional autopair))))
+    (nvm eglot neotree pyvenv lsp-ui flycheck lsp-mode rust-mode htmlize use-package gnu-elpa-keyring-update yaml-mode emmet-mode web-mode yasnippet quack paredit magit haskell-mode geiser expand-region dash-functional autopair))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
