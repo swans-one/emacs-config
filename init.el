@@ -18,8 +18,8 @@
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 (add-to-list 'load-path (expand-file-name "lisp/modes" user-emacs-directory))
 
-;; Append homebrew binary location to exec-path
-(setq exec-path (append exec-path '("/usr/local/bin")))
+;; Append homebrew and local binary locations to exec-path
+(setq exec-path (append exec-path '("/usr/local/bin" "~/.local/bin")))
 
 
 ;; Aesthetic customizations
@@ -50,6 +50,14 @@
 (use-package dash-functional
   :ensure t)
 
+(use-package eglot
+  :ensure t
+  :hook
+  ;; Disable flymake by default. Can enable with ~M-x flymake-mode~
+  (eglot-managed-mode . (lambda () (flymake-mode -1)))
+  :config
+  (setq eglot-extend-to-xref t))
+
 (use-package elec-pair
   :demand t
   :config
@@ -79,6 +87,8 @@
   :config
   (setq flycheck-check-syntax-automatically '(save))
   (setq flycheck-disabled-checkers '(rust-cargo)))
+
+(use-package flymake)
 
 (use-package htmlize
   :ensure t
@@ -202,7 +212,7 @@
  '(electric-indent-mode nil)
  '(package-selected-packages
    (quote
-    (neotree pyvenv lsp-ui flycheck lsp-mode rust-mode htmlize use-package gnu-elpa-keyring-update yaml-mode emmet-mode web-mode yasnippet quack paredit magit haskell-mode geiser expand-region dash-functional autopair))))
+    (eglot neotree pyvenv lsp-ui flycheck lsp-mode rust-mode htmlize use-package gnu-elpa-keyring-update yaml-mode emmet-mode web-mode yasnippet quack paredit magit haskell-mode geiser expand-region dash-functional autopair))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
