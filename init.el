@@ -61,7 +61,8 @@
   ;; Activate the node environment where the language server is installed
   ;; TODO: have this be project specific / configurable
   (nvm-use "v18.15.0")
-  (add-to-list 'eglot-server-programs '(web-mode . ("typescript-language-server" "--stdio"))))
+  (add-to-list 'eglot-server-programs '(web-mode . ("typescript-language-server" "--stdio")))
+  (add-to-list 'eglot-server-programs '(web-mode . ("svelteserver" "--stdio"))))
 
 (use-package elec-pair
   :demand t
