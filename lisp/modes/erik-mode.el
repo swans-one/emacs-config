@@ -139,6 +139,23 @@ the directory of the config file."
           (set-visited-file-name new-name)
           (set-buffer-modified-p nil))))))
 
+;; Lisp eval function
+;;;;;;;;;;;;;;;;;;;;;
+
+(defun erik-eval-and-print (start end)
+  "Run eval-region but print to the current buffer at point"
+  (interactive "r")
+  (eval-region start end (current-buffer)))
+
+(defun erik-eval-and-print-to-output (start end)
+  "Run eval-region but print to the buffer *Lisp Output*"
+  (interactive "r")
+  (let ((message-buffer (get-buffer-create "*Lisp Output*")))
+    (with-current-buffer message-buffer
+      (goto-char (point-max))
+      (insert-char ?\n))
+    (eval-region start end message-buffer)))
+
 
 ;; Org-mode functions
 ;;;;;;;;;;;;;;;;;;;;;
@@ -399,13 +416,17 @@ the directory of the config file."
 (define-key erik-mode-map (kbd "C-j t t") 'erik-toggle-ansi-term)
 (define-key erik-mode-map (kbd "C-j t o") 'ansi-term)
 
+;; C-j e _ -- Eval commands
+(define-key erik-mode-map (kbd "C-j e e") 'eval-region)
+(define-key erik-mode-map (kbd "C-j e p") 'erik-eval-and-print)
+(define-key erik-mode-map (kbd "C-j e o") 'erik-eval-and-print-to-output)
+
 ;; C-j o _ -- org mode stuff
 (define-key erik-mode-map (kbd "C-j o l") 'erik-md-to-org-link)
 (define-key erik-mode-map (kbd "C-j o p") 'erik-org-publish-wiki)
 
 ;; Binding functions I didn't write
 (define-key erik-mode-map (kbd "C-j C-j") 'ido-select-text)
-(define-key erik-mode-map (kbd "C-j e") 'eval-region)
 (define-key erik-mode-map (kbd "C-j l") 'emmet-expand-line)
 
 
