@@ -107,20 +107,6 @@
   ;; don't backwards search for files
   (setq ido-auto-merge-work-directories-length -1))
 
-(use-package lsp-mode
-  :ensure t
-  :hook (rust-mode . lsp)
-  :config
-  (setq lsp-headerline-breadcrumb-enable nil)
-  (setq lsp-diagnostics-provider :flycheck)
-  (setq lsp-modeline-diagnostics-enable nil)
-  (setq lsp-modeline-workspace-status-enable nil)
-  (define-key lsp-mode-map (kbd "M-l") lsp-command-map)
-  :commands lsp)
-
-(use-package lsp-ui
-  :ensure t)
-
 (use-package magit
   :ensure t)
 
@@ -221,7 +207,7 @@
  '(electric-indent-mode nil)
  '(package-selected-packages
    (quote
-    (nvm eglot neotree pyvenv lsp-ui flycheck lsp-mode rust-mode htmlize use-package gnu-elpa-keyring-update yaml-mode emmet-mode web-mode yasnippet quack paredit magit haskell-mode geiser expand-region dash-functional autopair))))
+    (nvm eglot neotree pyvenv flycheck rust-mode htmlize use-package gnu-elpa-keyring-update yaml-mode emmet-mode web-mode yasnippet quack paredit magit haskell-mode geiser expand-region dash-functional autopair))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
