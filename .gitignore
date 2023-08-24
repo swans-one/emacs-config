@@ -22,3 +22,4 @@ transient
 session.*
 .lsp-session*
 network-security.data
+projects
