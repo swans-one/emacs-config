@@ -1,10 +1,8 @@
-(require 'dash)
-
 ;; Utilities
 ;;;;;;;;;;;;
 
 (defun first-matching (pattern list)
-  "Return the first item in a list matching pattern, or nil if no match."
+  "Return the first item in a LIST matching PATTERN, or nil if no match."
   (if (not list)
       nil
       (if (string-match pattern (car list))
@@ -18,10 +16,10 @@
 ;;   - Read and parse that file
 ;;   - Use the values, or prompt
 (defun find-project-config (config-name &optional current-location)
-  "Find a config file upwards in the directory tree. CONFIG-NAME
-is a file name to search upwards in the directory tree
-for. CURRENT-LOCATION is a directory to search upward from, it
-defaults to the file of the current buffer"
+  "Find a config file upwards in the directory tree.
+CONFIG-NAME is a file name to search upwards in the directory
+tree for.  CURRENT-LOCATION is a directory to search upward from,
+it defaults to the file of the current buffer"
   (cond ((null (or current-location (buffer-file-name))) nil)
         ((null current-location)
          (find-project-config config-name (buffer-file-name)))
@@ -416,6 +414,13 @@ the directory of the config file."
 (define-key erik-mode-map (kbd "C-j t t") 'erik-toggle-ansi-term)
 (define-key erik-mode-map (kbd "C-j t o") 'ansi-term)
 
+;; C-j f _ -- Flymake
+(define-key erik-mode-map (kbd "C-j f f") 'flymake-mode)
+(define-key erik-mode-map (kbd "C-j f n") 'flymake-goto-next-error)
+(define-key erik-mode-map (kbd "C-j f p") 'flymake-goto-prev-error)
+(define-key erik-mode-map (kbd "C-j f a") 'flymake-show-project-diagnostics)
+(define-key erik-mode-map (kbd "C-j f s") 'flymake-show-buffer-diagnostics)
+
 ;; C-j e _ -- Eval commands
 (define-key erik-mode-map (kbd "C-j e e") 'eval-region)
 (define-key erik-mode-map (kbd "C-j e p") 'erik-eval-and-print)
@@ -450,3 +455,4 @@ the directory of the config file."
 (add-hook 'text-mode-hook 'erik-mode)
 
 (provide 'erik-mode)
+;;; erik-mode.el

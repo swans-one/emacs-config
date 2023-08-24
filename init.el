@@ -88,12 +88,6 @@
   :config
   (erik-mode))
 
-(use-package flycheck
-  :ensure t
-  :config
-  (setq flycheck-check-syntax-automatically '(save))
-  (setq flycheck-disabled-checkers '(rust-cargo)))
-
 (use-package flymake)
 
 (use-package htmlize
