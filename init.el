@@ -126,6 +126,10 @@
   (setq org-completion-use-ido t)
   (setq org-outline-path-complete-in-steps nil))
 
+(use-package org-slug
+  :load-path "lisp"
+  :after org)
+
 (use-package pyvenv
   :ensure t)
 
