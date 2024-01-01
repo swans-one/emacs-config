@@ -311,27 +311,35 @@ the directory of the config file."
           ((not num) 1)
           ((string-to-number num)))))
 
+(defun erik-ansi-window ()
+  "Return the window with an ansi-term buffer in it, or nil if not open"
+  (get-window-with-predicate
+   (lambda (win) (string-match "\\*ansi-term\\*.*"
+                               (buffer-name (window-buffer win))))))
+
+(defun erik-get-or-create-ansi-buffer ()
+  "Return a buffer with an ansi-term window creating it if it doesn't exist"
+  (or (car (match-buffers
+            (lambda (buf) (string-match "\\*ansi-term\\*.*" (buffer-name buf)))))
+      (save-window-excursion (ansi-term "/bin/bash"))))
+
 (defun erik-toggle-ansi-term ()
+  "Open / close an ansi-term tray.
+
+If there is an existing ansi-term buffer, it will be opened,
+otherwise one will be created"
   (interactive)
-  (let ((open-ansi (get-window-with-predicate
-                    (lambda (win)
-                      (let* ((buf (window-buffer win))
-                             (name (buffer-name buf)))
-                        (string-match "\\*ansi-term\\*.*" name))))))
+  (let ((open-ansi (erik-ansi-window)))
     (if open-ansi
         ;; If there is an window open with an ansi-term buffer, close it
         (delete-window open-ansi)
       ;; Otherwise create a new window & open the most recent ansi term in it
-      (let ((new-window (split-window (frame-root-window) -10 'below))
-            (recent-ansi-term (first-matching
-                               "\\*ansi-term\\*.*"
-                               (mapcar (lambda (x)
-                                         (format "%s" x)) (buffer-list)))))
-        (select-window new-window)
-        (set-window-dedicated-p new-window "ansi")
-        (if recent-ansi-term ;; nil if none are open
-            (set-window-buffer new-window recent-ansi-term)
-          (ansi-term "/bin/bash"))))))
+      (let* ((ansi-buf (erik-get-or-create-ansi-buffer))
+             (bottom-win (display-buffer-in-side-window
+                          ansi-buf
+                          '((side . bottom) (slot . 0)))))
+        (window-resize bottom-win -4)
+        bottom-win))))
 
 
 ;; Underlining
