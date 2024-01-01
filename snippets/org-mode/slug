@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: slug
+# key: #slug
+# --
+#+SLUG: $0

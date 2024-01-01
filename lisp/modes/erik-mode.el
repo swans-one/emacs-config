@@ -429,6 +429,7 @@ the directory of the config file."
 ;; C-j o _ -- org mode stuff
 (define-key erik-mode-map (kbd "C-j o l") 'erik-md-to-org-link)
 (define-key erik-mode-map (kbd "C-j o p") 'erik-org-publish-wiki)
+(define-key erik-mode-map (kbd "C-j o s") 'org-slug-slugify)
 
 ;; Binding functions I didn't write
 (define-key erik-mode-map (kbd "C-j C-j") 'ido-select-text)

@@ -64,7 +64,7 @@ then create a new file with that slug in the current directory."
         (message (format "No file with slug: %s; under dir: %s" slug root))
       (find-file path))))
 
-(defun org-slug-slugifiy (start end)
+(defun org-slug-slugify (start end)
   (interactive "r")
   (if (use-region-p)
       (let ((slug (buffer-substring start end)))
