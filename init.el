@@ -44,6 +44,11 @@
 ;; Package Configuration
 ;;;;;;;;;;;;;;;;;;;;;;;;
 
+(use-package ace-window
+  :ensure t
+  :bind ("M-o" . 'ace-window)
+  :config (setq aw-keys '(?a ?s ?d ?f ?j ?k ?l)))
+
 (use-package dash
   :ensure t)
 
@@ -206,7 +211,7 @@
  '(electric-indent-mode nil)
  '(package-selected-packages
    (quote
-    (nvm eglot neotree pyvenv flycheck rust-mode htmlize use-package gnu-elpa-keyring-update yaml-mode emmet-mode web-mode yasnippet quack paredit magit haskell-mode geiser expand-region dash-functional autopair))))
+    (ace-window nvm eglot neotree pyvenv flycheck rust-mode htmlize use-package gnu-elpa-keyring-update yaml-mode emmet-mode web-mode yasnippet quack paredit magit haskell-mode geiser expand-region dash-functional autopair))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

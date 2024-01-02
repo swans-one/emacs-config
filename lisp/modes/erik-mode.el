@@ -339,7 +339,7 @@ otherwise one will be created"
                           ansi-buf
                           '((side . bottom) (slot . 0)))))
         (window-resize bottom-win -4)
-        bottom-win))))
+        (select-window bottom-win)))))
 
 
 ;; Underlining
@@ -414,13 +414,15 @@ otherwise one will be created"
 (define-key erik-mode-map (kbd "C-j b r") 'erik-reload-file)
 (define-key erik-mode-map (kbd "C-j b n") 'erik-rename-file-and-buffer)
 
-;; C-j t _ -- Terminal commands
+;; C-j t _ -- Tray / Terminal commands
 (define-key erik-mode-map (kbd "C-j t s") 'erik-term-send-to-shell)
 (define-key erik-mode-map (kbd "C-j t l") 'erik-term-run-last)
 (define-key erik-mode-map (kbd "C-j t n") 'erik-next-term)
 (define-key erik-mode-map (kbd "C-j t p") 'erik-prev-term)
 (define-key erik-mode-map (kbd "C-j t t") 'erik-toggle-ansi-term)
 (define-key erik-mode-map (kbd "C-j t o") 'ansi-term)
+(define-key erik-mode-map (kbd "C-j t a") 'window-toggle-side-windows)
+(define-key erik-mode-map (kbd "C-j t d") 'neotree-toggle)
 
 ;; C-j f _ -- Flymake
 (define-key erik-mode-map (kbd "C-j f f") 'flymake-mode)
