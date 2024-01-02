@@ -47,7 +47,10 @@
 (use-package ace-window
   :ensure t
   :bind ("M-o" . 'ace-window)
-  :config (setq aw-keys '(?a ?s ?d ?f ?j ?k ?l)))
+  :config  (setq aw-keys '(?a ?s ?d ?f ?j ?k ?l))
+  ;; Make sure 'ace-window is bound for ansi-term as well
+  :hook
+  (term-mode . (lambda () (define-key term-raw-map (kbd "M-o") 'ace-window))))
 
 (use-package dash
   :ensure t)
