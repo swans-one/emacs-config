@@ -64,6 +64,29 @@ then create a new file with that slug in the current directory."
         (message (format "No file with slug: %s; under dir: %s" slug root))
       (find-file path))))
 
+
+(defun tag-find-command (tag root)
+  (mapconcat 'identity
+             `("find"
+               ,root
+               "-type f"
+               "-name '*.org'"
+               "-exec grep --color -nH --null -e"
+               ,(concat "'^" "#+.*TAG.*:.*" tag ".*" "$'")
+               "\{\} ';'")
+             " "))
+
+(defun org-slug-follow-tag (path &optional root)
+  "Follow a slug-tag link PATH to a listing of matching org files
+in the project.
+
+PATH will be the part of the link after 'slug-tag:'. The function
+grep-find is used to look for files with matching tag directives."
+  (unless root (setq root (org-slug-get-root)))
+  (let* ((tag path)
+         (find-command (tag-find-command tag root)))
+    (grep-find find-command)))
+
 (defun org-slug-slugify (start end)
   (interactive "r")
   (if (use-region-p)
@@ -72,7 +95,16 @@ then create a new file with that slug in the current directory."
         (insert (format "[[slug:%s][%s]]" slug slug)))
       (message "no slug in active region")))
 
+(defun org-slug-tagify (start end)
+  (interactive "r")
+  (if (use-region-p)
+      (let ((tag (buffer-substring start end)))
+        (kill-region start end)
+        (insert (format "[[slug-tag:%s][#%s]]" tag tag)))
+      (message "no tag in active region")))
+
 (org-link-set-parameters "slug" :follow #'org-slug-follow)
+(org-link-set-parameters "slug-tag" :follow #'org-slug-follow-tag)
 
 (provide 'org-slug)
 ;;; org-slug.el ends here
