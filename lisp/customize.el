@@ -15,6 +15,8 @@
  indent-line-function 'insert-tab)
 (global-subword-mode 1)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+(electric-indent-mode 1)
+(add-hook 'python-mode-hook (lambda () electric-indent-local-mode -1))
 
 ;; Make the text size reasonable
 (set-face-attribute 'default nil :height 120)
