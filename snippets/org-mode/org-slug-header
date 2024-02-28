@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: org-slug-header
+# key: #ss
+# --
+#+TITLE: $1
+#+SLUG: $2
+#+WIKITAGS: $3
+$0

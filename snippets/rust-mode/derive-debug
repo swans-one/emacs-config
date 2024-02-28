@@ -2,4 +2,4 @@
 # name: derive-debug
 # key: debug
 # --
-\#[derive(Debug)]
+#[derive(Debug)]

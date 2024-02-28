@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: count-distinct
+# key: cd
+# --
+count(distinct $1) as $1_count$0

@@ -150,6 +150,13 @@
 (use-package show-paren-mode ;; built-in
   :hook (emacs-lisp-mode scheme-mode))
 
+(use-package sql ;; built in
+  :config
+  ;; Fix non-idempotent indent in sql-mode breaking yasnippet mirrors
+  ;; See: https://emacs.stackexchange.com/a/31917/12244
+  (add-hook 'sql-mode-hook
+            (lambda () (setq-local yas-indent-line 'fixed))))
+
 (use-package term ;; built in
   :config
   (define-key term-raw-map (kbd "C-c C-y") 'term-paste))
