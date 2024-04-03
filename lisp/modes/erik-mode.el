@@ -385,6 +385,12 @@ otherwise one will be created"
          default-dark-color-theme
        default-light-color-theme))))
 
+(defun erik-flymake-eglot-toggle ()
+  "Toggle flymake in an eglot managed buffer"
+  (interactive)
+  (if (bound-and-true-p flymake-mode)
+      (eglot-reconnect (eglot--current-server-or-lose) t)
+    (flymake-mode)))
 
 ;; Keymap
 (defvar erik-mode-map (make-sparse-keymap) "Keymap for erik-mode")
@@ -425,7 +431,7 @@ otherwise one will be created"
 (define-key erik-mode-map (kbd "C-j t d") 'neotree-toggle)
 
 ;; C-j f _ -- Flymake
-(define-key erik-mode-map (kbd "C-j f f") 'flymake-mode)
+(define-key erik-mode-map (kbd "C-j f f") 'erik-flymake-eglot-toggle)
 (define-key erik-mode-map (kbd "C-j f n") 'flymake-goto-next-error)
 (define-key erik-mode-map (kbd "C-j f p") 'flymake-goto-prev-error)
 (define-key erik-mode-map (kbd "C-j f a") 'flymake-show-project-diagnostics)

@@ -52,6 +52,11 @@
   :hook
   (term-mode . (lambda () (define-key term-raw-map (kbd "M-o") 'ace-window))))
 
+(use-package corfu
+  :ensure t
+  :init
+  (global-corfu-mode))
+
 (use-package dash
   :ensure t)
 
@@ -62,7 +67,9 @@
   :ensure t
   :hook
   ;; Disable flymake by default. Can enable with ~M-x flymake-mode~
-  (eglot-managed-mode . (lambda () (flymake-mode -1)))
+  (eglot-managed-mode . (lambda ()
+                          (flymake-mode -1)
+                          (eglot-inlay-hints-mode -1)))
   :config
   ;; When using xref, still have eglot active in the followed location
   (setq eglot-extend-to-xref t)
@@ -70,7 +77,10 @@
   ;; TODO: have this be project specific / configurable
   (nvm-use "v18.15.0")
   (add-to-list 'eglot-server-programs '(web-mode . ("typescript-language-server" "--stdio")))
-  (add-to-list 'eglot-server-programs '(web-mode . ("svelteserver" "--stdio"))))
+  (add-to-list 'eglot-server-programs '(web-mode . ("svelteserver" "--stdio")))
+  (add-to-list 'eglot-server-programs
+               '((rust-ts-mode rust-mode) .
+                 ("rust-analyzer" :initializationOptions (:check (:command "clippy"))))))
 
 (use-package elec-pair
   :demand t
@@ -222,7 +232,7 @@
    '("9494d6d64290602054292f7c1b2db4285b3fea4fbf63b54bdac21aa6f6b0a7e6" "f897f31a459baa86363c91ab0d98d184e41d42fd2c33ec39e72561f25bd8138b" default))
  '(electric-indent-mode nil)
  '(package-selected-packages
-   '(json-mode ace-window nvm eglot neotree pyvenv flycheck rust-mode htmlize use-package gnu-elpa-keyring-update yaml-mode emmet-mode web-mode yasnippet quack paredit magit haskell-mode geiser expand-region dash-functional autopair)))
+   '(corfu json-mode ace-window nvm eglot neotree pyvenv flycheck rust-mode htmlize use-package gnu-elpa-keyring-update yaml-mode emmet-mode web-mode yasnippet quack paredit magit haskell-mode geiser expand-region dash-functional autopair)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
