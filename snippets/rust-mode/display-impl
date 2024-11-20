@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: display-impl
+# key: display
+# --
+impl std::fmt::Display for $1 {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+        write!(f, "{}", $0)
+    }
+}

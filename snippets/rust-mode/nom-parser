@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: nom-parser
+# key: nomparse
+# --
+fn parse_$1(i: &str) -> IResult<&str, $2, VerboseError<&str>> {
+    $0
+}

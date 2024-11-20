@@ -16,7 +16,6 @@
 (global-subword-mode 1)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (electric-indent-mode 1)
-(add-hook 'python-mode-hook (lambda () electric-indent-local-mode -1))
 
 ;; Make the text size reasonable
 (set-face-attribute 'default nil :height 120)
@@ -27,6 +26,10 @@
    (invert-face 'mode-line)
    (run-with-timer 0.1 nil 'invert-face 'mode-line))
 (setq visible-bell nil ring-bell-function 'my-terminal-visible-bell)
+
+;; Better scrolling
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 8) ((control) . nil)))
+(setq mouse-wheel-progressive-speed nil)
 
 ;; Save all autosave files in a backups directory
 (defvar user-temporary-file-directory

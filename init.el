@@ -145,7 +145,14 @@
                              (org-agenda-files :maxlevel . 6)))
   (setq org-refile-use-outline-path 'file)
   (setq org-completion-use-ido t)
-  (setq org-outline-path-complete-in-steps nil))
+  (setq org-outline-path-complete-in-steps nil)
+
+  ;; When calling org-do-demote / org-do-promote via M-right / M-left
+  ;; on a header don't also indent the body.
+  ;;
+  ;; See: https://emacs.stackexchange.com/questions/41220/org-mode-disable-indentation-when-promoting-and-demoting-trees-subtrees
+  (setq org-adapt-indentation nil)
+)
 
 (use-package org-slug
   :load-path "lisp"
@@ -211,11 +218,22 @@
 (use-package yaml-mode
   :ensure t)
 
+
+(defun yas-org-very-safe-expand ()
+  (let ((yas-fallback-behavior 'return-nil)) (yas-expand)))
 (use-package yasnippet
   :ensure t
   :init
   ;; disable for term-mode
   (add-hook 'term-mode-hook (lambda () (yas-minor-mode -1)))
+
+  ;; Fix org mode issue? https://orgmode.org/manual/Conflicts.html#index-yasnippet_002eel
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (make-variable-buffer-local 'yas-trigger-key)
+              (setq yas-trigger-key [tab])
+              (add-to-list 'org-tab-first-hook 'yas-org-very-safe-expand)
+              (define-key yas-keymap [tab] 'yas-next-field)))
   :config
   (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
   (setq yas-prompt-functions '(yas-ido-prompt))
