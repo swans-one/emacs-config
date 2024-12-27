@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: dot-rcp-header
+# key: rcphead
+# expand-env: ((yas-indent-line 'fixed))
+# --
+Title: $1
+Author: $2
+Published: $3
+
+@ Recipe
+
+$0

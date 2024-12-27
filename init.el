@@ -52,6 +52,18 @@
   :hook
   (term-mode . (lambda () (define-key term-raw-map (kbd "M-o") 'ace-window))))
 
+(use-package caddyfile-mode
+  :ensure t
+  :mode (("Caddyfile\\'" . caddyfile-mode)
+         ("caddy\\.conf\\'" . caddyfile-mode))
+  :hook
+  ;; This has to be a hook because indent-tabs-mode and tab-width are
+  ;; buffer-local variables, so we can't modify them in `config:` as
+  ;; that is only run once when caddyfile-mode is loaded.
+  (caddyfile-mode . (lambda ()
+                      (setq indent-tabs-mode nil)
+                      (setq tab-width 4))))
+
 (use-package corfu
   :ensure t
   :init
@@ -250,7 +262,7 @@
    '("9494d6d64290602054292f7c1b2db4285b3fea4fbf63b54bdac21aa6f6b0a7e6" "f897f31a459baa86363c91ab0d98d184e41d42fd2c33ec39e72561f25bd8138b" default))
  '(electric-indent-mode nil)
  '(package-selected-packages
-   '(corfu json-mode ace-window nvm eglot neotree pyvenv flycheck rust-mode htmlize use-package gnu-elpa-keyring-update yaml-mode emmet-mode web-mode yasnippet quack paredit magit haskell-mode geiser expand-region dash-functional autopair)))
+   '(caddyfile-mode corfu json-mode ace-window nvm eglot neotree pyvenv flycheck rust-mode htmlize use-package gnu-elpa-keyring-update yaml-mode emmet-mode web-mode yasnippet quack paredit magit haskell-mode geiser expand-region dash-functional autopair)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
