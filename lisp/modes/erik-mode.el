@@ -392,6 +392,23 @@ otherwise one will be created"
       (eglot-reconnect (eglot--current-server-or-lose) t)
     (flymake-mode)))
 
+;; Chinese input method functions
+(defun erik-input-pinyin ()
+  "Set input method to chinese-sisheng"
+  (interactive)
+  (set-input-method "chinese-sisheng"))
+
+(defun erik-input-deactivate ()
+  "Deactivate the current input method"
+  (interactive)
+  (deactivate-input-method))
+
+(defun erik-input-chinese ()
+  "Set input method to pyim"
+  (interactive)
+  (set-input-method "pyim"))
+
+
 ;; Keymap
 (defvar erik-mode-map (make-sparse-keymap) "Keymap for erik-mode")
 
@@ -447,6 +464,11 @@ otherwise one will be created"
 (define-key erik-mode-map (kbd "C-j o p") 'erik-org-publish-wiki)
 (define-key erik-mode-map (kbd "C-j o s") 'org-slug-slugify)
 (define-key erik-mode-map (kbd "C-j o t") 'org-slug-tagify)
+
+;; C-j i _ -- input method commands
+(define-key erik-mode-map (kbd "C-j i p") 'erik-input-pinyin)
+(define-key erik-mode-map (kbd "C-j i c") 'erik-input-chinese)
+(define-key erik-mode-map (kbd "C-j i e") 'erik-input-deactivate)
 
 ;; Binding functions I didn't write
 (define-key erik-mode-map (kbd "C-j C-j") 'ido-select-text)
