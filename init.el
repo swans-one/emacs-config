@@ -21,6 +21,8 @@
 ;; Append homebrew and local binary locations to exec-path
 (setq exec-path (append exec-path '("/usr/local/bin" "~/.local/bin")))
 
+;; Don't pop up the wanrings buffer for native compilation
+(setq native-comp-async-report-warnings-errors 'silent)
 
 ;; Aesthetic customizations
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -154,10 +156,21 @@
 (use-package nvm
   :ensure t)
 
+(defun yas-org-very-safe-expand ()
+  (let ((yas-fallback-behavior 'return-nil)) (yas-expand)))
+
 (use-package org ;; built-in
   :mode ("\\.org\\'" . org-mode)
   :bind
   (:map org-mode-map ("C-c l" . 'org-store-link))
+  :hook
+  ;; Fix org mode issue? https://orgmode.org/manual/Conflicts.html#index-yasnippet_002eel
+  (org-mode . (lambda ()
+                (make-variable-buffer-local 'yas-trigger-key)
+                (setq yas-trigger-key [tab])
+                (add-to-list 'org-tab-first-hook 'yas-org-very-safe-expand)
+                (define-key yas-keymap [tab] 'yas-next-field)))
+
   :config
   (setq org-refile-targets '((nil :maxlevel . 6)
                              (org-agenda-files :maxlevel . 6)))
@@ -243,6 +256,7 @@
          ("\\.svelte\\'" . web-mode)
          ("\\.ts\\'" . web-mode))
   :config
+  (add-hook 'web-mode-hook #'electric-indent-local-mode)
   (setq web-mode-enable-auto-closing t
         web-mode-enable-auto-pairing t
         web-mode-auto-close-style 1
@@ -258,21 +272,12 @@
   :ensure t)
 
 
-(defun yas-org-very-safe-expand ()
-  (let ((yas-fallback-behavior 'return-nil)) (yas-expand)))
 (use-package yasnippet
   :ensure t
   :init
   ;; disable for term-mode
   (add-hook 'term-mode-hook (lambda () (yas-minor-mode -1)))
 
-  ;; Fix org mode issue? https://orgmode.org/manual/Conflicts.html#index-yasnippet_002eel
-  (add-hook 'org-mode-hook
-            (lambda ()
-              (make-variable-buffer-local 'yas-trigger-key)
-              (setq yas-trigger-key [tab])
-              (add-to-list 'org-tab-first-hook 'yas-org-very-safe-expand)
-              (define-key yas-keymap [tab] 'yas-next-field)))
   :config
   (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
   (setq yas-prompt-functions '(yas-ido-prompt))

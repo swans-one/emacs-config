@@ -11,6 +11,16 @@
 
 (defun parent (loc) (file-name-directory (directory-file-name loc)))
 
+(defun collect-regex-matches (regex &optional capture-group)
+  "Return all matches of a regex in the current buffer optionally
+   use a capture group"
+  (beginning-of-buffer)
+  (let ((matches nil))
+    (while (re-search-forward regex nil t)
+      (push (match-string-no-properties capture-group) matches)
+    )
+    matches))
+
 ;; Config-file utilties
 ;;   - Find a project-level config from the current file
 ;;   - Read and parse that file
@@ -392,7 +402,34 @@ otherwise one will be created"
       (eglot-reconnect (eglot--current-server-or-lose) t)
     (flymake-mode)))
 
+
+;; Web-mode paredit-isms
+;;;;;;;;;;;;;;;;;;;;;;;;
+(defun erik-web-mode-slurp-text ()
+  "Slurp in the sibling text"
+  (interactive)
+  (save-excursion
+    (web-mode-element-end)
+    (set-mark (point))
+    (web-mode-tag-next)
+    (kill-region (mark) (point))
+    (web-mode-element-previous)
+    (web-mode-tag-next)
+    (yank)))
+
+(defun erik-web-mode-slurp-node ()
+  "Slurp in the sibling node"
+  (interactive)
+  (save-excursion
+    (web-mode-element-next)
+    (web-mode-element-select)
+    (kill-region (mark) (point))
+    (web-mode-tag-previous)
+    (yank)))
+
+
 ;; Chinese input method functions
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun erik-input-pinyin ()
   "Set input method to chinese-sisheng"
   (interactive)
@@ -408,6 +445,30 @@ otherwise one will be created"
   (interactive)
   (set-input-method "pyim"))
 
+(defun erik-chinese-lookup-character ()
+  (interactive)
+  (let* ((char (char-to-string (char-after)))
+        (url (format "https://dong-chinese.com/wiki/%s" char)))
+    (browse-url url)))
+
+(defun erik-chinese-lookup-word (start end)
+  (interactive "r")
+  (let* ((word (buffer-substring start end))
+         (url (format "https://dong-chinese.com/wiki/%s" word)))
+    (browse-url url)))
+
+;; Anki authoring functions
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun erik-anki-make-cloze (start end)
+  (interactive "r")
+  (let* ((cloze-regex "cl\\([[:digit:]]+\\)::")
+         (matches (collect-regex-matches cloze-regex 1))
+         (highest (car (sort (mapcar 'string-to-number matches) #'>))))
+    (goto-char end)
+    (insert "}}")
+    (goto-char start)
+    (insert (format "{{cl%s::" (+ highest 1)))))
 
 ;; Keymap
 (defvar erik-mode-map (make-sparse-keymap) "Keymap for erik-mode")
@@ -422,6 +483,10 @@ otherwise one will be created"
 (define-key erik-mode-map (kbd "C-x C-g") 'magit-status)
 (define-key erik-mode-map (kbd "C-]") 'er/expand-region)
 (define-key erik-mode-map (kbd "<C-M-backspace>") 'erik-collapse-line-back)
+(define-key erik-mode-map (kbd "M-I") 'windmove-up)
+(define-key erik-mode-map (kbd "M-K") 'windmove-down)
+(define-key erik-mode-map (kbd "M-J") 'windmove-left)
+(define-key erik-mode-map (kbd "M-L") 'windmove-right)
 
 ;; Erik-mode overrides
 ;;
@@ -469,6 +534,17 @@ otherwise one will be created"
 (define-key erik-mode-map (kbd "C-j i p") 'erik-input-pinyin)
 (define-key erik-mode-map (kbd "C-j i c") 'erik-input-chinese)
 (define-key erik-mode-map (kbd "C-j i e") 'erik-input-deactivate)
+
+;; C-j h _ -- html commands
+(define-key erik-mode-map (kbd "C-j h s n") 'erik-web-mode-slurp-node)
+(define-key erik-mode-map (kbd "C-j h s t") 'erik-web-mode-slurp-text)
+
+;; C-j c _ -- chinese commands
+(define-key erik-mode-map (kbd "C-j c l c") 'erik-chinese-lookup-character)
+(define-key erik-mode-map (kbd "C-j c l w") 'erik-chinese-lookup-word)
+
+;; C-j a _ -- anki commands
+(define-key erik-mode-map (kbd "C-j a c") 'erik-anki-make-cloze)
 
 ;; Binding functions I didn't write
 (define-key erik-mode-map (kbd "C-j C-j") 'ido-select-text)
