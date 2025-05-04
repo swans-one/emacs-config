@@ -11,12 +11,18 @@
 
 (defun parent (loc) (file-name-directory (directory-file-name loc)))
 
-(defun collect-regex-matches (regex &optional capture-group)
-  "Return all matches of a regex in the current buffer optionally
-   use a capture group"
-  (beginning-of-buffer)
-  (let ((matches nil))
-    (while (re-search-forward regex nil t)
+(defun collect-regex-matches (regex &optional capture-group start end)
+  "Return all matches of a regex in the current buffer.
+Optionally:
+  non-nil `capture-group' will return the value of the group.
+  non-nil `start' will start the search at the given position.
+  non-nil `end' will end the search at the given position."
+  (let (
+        (begin (or start (point-min)))
+        (stop (or end (point-max)))
+        (matches nil))
+    (goto-char begin)
+    (while (re-search-forward regex stop t)
       (push (match-string-no-properties capture-group) matches)
     )
     matches))
@@ -460,15 +466,36 @@ otherwise one will be created"
 ;; Anki authoring functions
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun erik-anki-make-cloze (start end)
+(defun erik-anki-make-cloze-buffer (start end)
+  "Take a region and turn it into a close, numbered based on the
+current buffer"
   (interactive "r")
   (let* ((cloze-regex "cl\\([[:digit:]]+\\)::")
          (matches (collect-regex-matches cloze-regex 1))
          (highest (car (sort (mapcar 'string-to-number matches) #'>))))
     (goto-char end)
     (insert "}}")
-    (goto-char start)
-    (insert (format "{{cl%s::" (+ highest 1)))))
+    (save-excursion
+      (goto-char start)
+      (insert (format "{{cl%s::" (+ highest 1))))))
+
+(defun erik-anki-make-cloze-line (start end)
+  "Take a region and turn it into a close, numbered based on the
+current line"
+  (interactive "r")
+  (let* ((cloze-regex "cl\\([[:digit:]]+\\)::")
+         (search-start (line-beginning-position))
+         (search-end (line-end-position))
+         (matches (collect-regex-matches cloze-regex 1 search-start search-end))
+         (highest (or
+                   (car (sort (mapcar 'string-to-number matches) #'>))
+                   0)))
+    (goto-char end)
+    (insert "}}")
+    (save-excursion
+      (goto-char start)
+      (insert (format "{{cl%s::" (+ highest 1))))))
+
 
 ;; Keymap
 (defvar erik-mode-map (make-sparse-keymap) "Keymap for erik-mode")
@@ -544,7 +571,8 @@ otherwise one will be created"
 (define-key erik-mode-map (kbd "C-j c l w") 'erik-chinese-lookup-word)
 
 ;; C-j a _ -- anki commands
-(define-key erik-mode-map (kbd "C-j a c") 'erik-anki-make-cloze)
+(define-key erik-mode-map (kbd "C-j a c") 'erik-anki-make-cloze-buffer)
+(define-key erik-mode-map (kbd "C-j a l") 'erik-anki-make-cloze-line)
 
 ;; Binding functions I didn't write
 (define-key erik-mode-map (kbd "C-j C-j") 'ido-select-text)
