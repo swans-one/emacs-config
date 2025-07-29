@@ -1,16 +1,12 @@
-;; init.el is my entry point for emacs customization. This file should
-;; be used exclusively for setting up the load path, handling
-;; packages, and requiring other files that contain the actual
-;; customizations that I'm including.
+;; init.el is my entry point for emacs customization.
 ;;
 ;; The customizations are further organized into the following files,
-;; all within `site-lisp`:
+;; all within `lisp`:
 ;;
 ;;     - customize.el   = Simple Aesthetic customizations
-;;     - defuns.el      = functions that I've written
-;;     - keybindings.el = Global and mode specific keybindings
-;;     - mode-mappings  = map filenames to major modes
-;;     - hooks          = load elisp on major mode loading
+;;     - keybinds.el    = Global keybindings (and unbindings)
+;;
+;; These files should be loaded before the rest of the configuration
 
 
 ;; Load Path / exec path
@@ -28,6 +24,12 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (require 'customize)
 
+;; Global Keybinds
+;;;;;;;;;;;;;;;;;;
+
+;; Note, this includes unbindings which may be useful later
+;; TODO: move some global bindings from erik-mode here
+(require 'keybinds)
 
 ;; Package Management Setup
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
