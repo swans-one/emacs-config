@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: svelte-if-else
+# key: #ifelse
+# --
+{#if $1}
+  $0
+{:else}
+{/if}

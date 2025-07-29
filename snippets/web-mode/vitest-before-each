@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: vitest-before-each
+# key: before
+# --
+beforeEach(() => {
+  $0
+})

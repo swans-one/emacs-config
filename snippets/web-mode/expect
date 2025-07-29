@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: expect
+# key: exp
+# --
+expect($1).toBe$2($0);
