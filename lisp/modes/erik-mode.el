@@ -496,8 +496,22 @@ current line"
       (goto-char start)
       (insert (format "{{cl%s::" (+ highest 1))))))
 
+;;;;;;;;;;;;;;;;;
+;; My Requires ;;
+;;;;;;;;;;;;;;;;;
 
-;; Keymap
+;; These requires are files I've written, and are included in my load
+;; path. Currently via the following line in init.el:
+;;
+;; (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+
+(require 'window-swap)
+
+
+;;;;;;;;;;;;
+;; Keymap ;;
+;;;;;;;;;;;;
+
 (defvar erik-mode-map (make-sparse-keymap) "Keymap for erik-mode")
 
 ;; Full overrides
@@ -528,6 +542,9 @@ current line"
 ;; C-j b _ -- Buffer manipulation
 (define-key erik-mode-map (kbd "C-j b r") 'erik-reload-file)
 (define-key erik-mode-map (kbd "C-j b n") 'erik-rename-file-and-buffer)
+(define-key erik-mode-map (kbd "C-j b s") 'window-swap)
+(define-key erik-mode-map (kbd "C-j b t") 'window-swap-start)
+(define-key erik-mode-map (kbd "C-j b c") 'clear-window-swap)
 
 ;; C-j t _ -- Tray / Terminal commands
 (define-key erik-mode-map (kbd "C-j t s") 'erik-term-send-to-shell)
