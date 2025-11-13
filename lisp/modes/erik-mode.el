@@ -1,6 +1,10 @@
 ;; Utilities
 ;;;;;;;;;;;;
 
+(defun open-erik-mode-file ()
+  (interactive)
+  (find-file "/home/erik/.emacs.d/lisp/modes/erik-mode.el"))
+
 (defun first-matching (pattern list)
   "Return the first item in a LIST matching PATTERN, or nil if no match."
   (if (not list)
@@ -506,7 +510,7 @@ current line"
 ;; (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
 (require 'window-swap)
-
+(require 'erik-movement)
 
 ;;;;;;;;;;;;
 ;; Keymap ;;
@@ -524,10 +528,16 @@ current line"
 (define-key erik-mode-map (kbd "C-x C-g") 'magit-status)
 (define-key erik-mode-map (kbd "C-]") 'er/expand-region)
 (define-key erik-mode-map (kbd "<C-M-backspace>") 'erik-collapse-line-back)
+
+;; Window management
 (define-key erik-mode-map (kbd "M-I") 'windmove-up)
 (define-key erik-mode-map (kbd "M-K") 'windmove-down)
 (define-key erik-mode-map (kbd "M-J") 'windmove-left)
 (define-key erik-mode-map (kbd "M-L") 'windmove-right)
+
+;; Movement
+(define-key erik-mode-map (kbd "M-n") 'blank-line-down)
+(define-key erik-mode-map (kbd "M-p") 'blank-line-up)
 
 ;; Erik-mode overrides
 ;;
@@ -545,6 +555,7 @@ current line"
 (define-key erik-mode-map (kbd "C-j b s") 'window-swap)
 (define-key erik-mode-map (kbd "C-j b t") 'window-swap-start)
 (define-key erik-mode-map (kbd "C-j b c") 'clear-window-swap)
+(define-key erik-mode-map (kbd "C-j b e") 'open-erik-mode-file)
 
 ;; C-j t _ -- Tray / Terminal commands
 (define-key erik-mode-map (kbd "C-j t s") 'erik-term-send-to-shell)
@@ -560,7 +571,7 @@ current line"
 (define-key erik-mode-map (kbd "C-j f f") 'erik-flymake-eglot-toggle)
 (define-key erik-mode-map (kbd "C-j f n") 'flymake-goto-next-error)
 (define-key erik-mode-map (kbd "C-j f p") 'flymake-goto-prev-error)
-(define-key erik-mode-map (kbd "C-j f a") 'flymake-show-project-diagnostics)
+
 (define-key erik-mode-map (kbd "C-j f s") 'flymake-show-buffer-diagnostics)
 
 ;; C-j e _ -- Eval commands
