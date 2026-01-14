@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: workdir
+# key: WORK_DIR=
+# --
+WORK_DIR=$( cd -- "$( dirname -- "\$0" )" &> /dev/null && pwd )
+$0
