@@ -537,9 +537,12 @@ current line"
   (lambda () (interactive) (other-window -1)))
 (define-key erik-mode-map (kbd "C-c C-f") 'find-file-at-point)
 (define-key erik-mode-map (kbd "<C-return>") 'electric-newline-and-maybe-indent)
-(define-key erik-mode-map (kbd "C-x C-g") 'magit-status)
 (define-key erik-mode-map (kbd "C-]") 'er/expand-region)
 (define-key erik-mode-map (kbd "<C-M-backspace>") 'erik-collapse-line-back)
+
+
+(define-key erik-mode-map (kbd "C-x C-g") 'magit-status)
+(define-key erik-mode-map (kbd "C-j C-v") 'magit-status)
 
 ;; Window management
 (define-key erik-mode-map (kbd "M-I") 'windmove-up)
