@@ -522,7 +522,6 @@ current line"
 (define-key erik-mode-map (kbd "C-o") 'other-window)
 (define-key erik-mode-map (kbd "C-S-o")
   (lambda () (interactive) (other-window -1)))
-(define-key erik-mode-map (kbd "C-c C-f") 'find-file-at-point)
 (define-key erik-mode-map (kbd "<C-return>") 'electric-newline-and-maybe-indent)
 (define-key erik-mode-map (kbd "C-]") 'er/expand-region)
 (define-key erik-mode-map (kbd "<C-M-backspace>") 'erik-collapse-line-back)
@@ -538,8 +537,8 @@ current line"
 (define-key erik-mode-map (kbd "M-L") 'windmove-right)
 
 ;; Movement
-(define-key erik-mode-map (kbd "M-N") 'blank-line-down)
-(define-key erik-mode-map (kbd "M-P") 'blank-line-up)
+(define-key erik-mode-map (kbd "M-n") 'blank-line-down)
+(define-key erik-mode-map (kbd "M-p") 'blank-line-up)
 
 ;; Erik-mode overrides
 ;;

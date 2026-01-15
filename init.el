@@ -1,3 +1,5 @@
+;;; ...  -*- lexical-binding: t -*-
+
 ;; init.el is my entry point for emacs customization.
 ;;
 ;; The customizations are further organized into the following files,
@@ -256,6 +258,25 @@
   :config
   (setq uniquify-buffer-name-style 'post-forward))
 
+(defun my-web-mode-end-fix (mvmt-fn)
+  "Fix behaviour of movement from the end of an element
+If point is at the end of an element
+(e.g. after calling web-mode-element-end) Then most movement
+functions should behave as if you're still inside that
+element. Unless you land at the begining of the next element."
+  (lambda ()
+    (interactive)
+    (if (and (eq ?> (char-before)) (not (eq ?< (char-after))))
+        (progn
+          (backward-char)
+          (call-interactively mvmt-fn))
+      (call-interactively mvmt-fn))))
+
+(defalias 'my-web-mode-element-beginning-2
+  (my-web-mode-end-fix 'web-mode-element-beginning))
+(defalias 'my-web-mode-element-sibling-previous-2
+  (my-web-mode-end-fix 'web-mode-element-sibling-previous))
+
 (use-package web-mode
   :ensure t
   :mode (("\\.html?\\'" . web-mode)
@@ -264,15 +285,17 @@
          ("\\.ts\\'" . web-mode))
   :bind
   (:map web-mode-map
-        ("C-c C-n" . web-mode-element-next)
-        ("C-c C-p" . web-mode-element-previous)
-        ("C-c C-u" . web-mode-element-parent)
-        ("C-c C-d" . web-mode-element-child))
+        ("C-c C-n" . web-mode-element-sibling-next)
+        ("C-c C-p" . web-mode-element-sibling-previous)
+        ("C-c C-f" . web-mode-element-parent)
+        ("C-c C-b" . web-mode-element-child))
   (:repeat-map web-mode-repeat-map
-               ("n" . web-mode-element-next)
-               ("p" . web-mode-element-previous)
-               ("u" . web-mode-element-parent)
-               ("d" . web-mode-element-child))
+               ("n" . web-mode-element-sibling-next)
+               ("p" . my-web-mode-element-sibling-previous-2)
+               ("f" . web-mode-element-child)
+               ("b" . web-mode-element-parent)
+               ("e" . web-mode-element-end)
+               ("a" . my-web-mode-element-beginning-2))
   :config
   (add-hook 'web-mode-hook #'electric-indent-local-mode)
   (setq web-mode-enable-auto-closing t
