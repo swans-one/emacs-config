@@ -437,19 +437,6 @@ otherwise one will be created"
     (web-mode-tag-previous)
     (yank)))
 
-(defun erik-web-mode-wrap (beginning end)
-  (interactive "r")
-  (let* ((element (read-from-minibuffer "Element: "))
-         (open-tag (format "<%s>\n" element))
-         (close-tag (format "\n</%s>" element))
-         (new-region-end (+ end 6 (* 2 (length element)))))
-    (save-excursion
-      (goto-char end)
-      (insert close-tag)
-      (goto-char beginning)
-      (insert open-tag))
-    (indent-region beginning new-region-end)))
-
 ;; Chinese input method functions
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun erik-input-pinyin ()
@@ -608,7 +595,6 @@ current line"
 ;; C-j h _ -- html commands
 (define-key erik-mode-map (kbd "C-j h s n") 'erik-web-mode-slurp-node)
 (define-key erik-mode-map (kbd "C-j h s t") 'erik-web-mode-slurp-text)
-(define-key erik-mode-map (kbd "C-j h w") 'erik-web-mode-wrap)
 
 ;; C-j c _ -- chinese commands
 (define-key erik-mode-map (kbd "C-j c l c") 'erik-chinese-lookup-character)

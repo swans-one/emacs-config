@@ -31,6 +31,9 @@
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 8) ((control) . nil)))
 (setq mouse-wheel-progressive-speed nil)
 
+;; turn repeat mode on
+(repeat-mode 1)
+
 ;; Save all autosave files in a backups directory
 (defvar user-temporary-file-directory
   "~/.emacs-backup")

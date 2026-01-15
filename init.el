@@ -262,6 +262,17 @@
          ("\\.js[x]?\\'" . web-mode)
          ("\\.svelte\\'" . web-mode)
          ("\\.ts\\'" . web-mode))
+  :bind
+  (:map web-mode-map
+        ("C-c C-n" . web-mode-element-next)
+        ("C-c C-p" . web-mode-element-previous)
+        ("C-c C-u" . web-mode-element-parent)
+        ("C-c C-d" . web-mode-element-child))
+  (:repeat-map web-mode-repeat-map
+               ("n" . web-mode-element-next)
+               ("p" . web-mode-element-previous)
+               ("u" . web-mode-element-parent)
+               ("d" . web-mode-element-child))
   :config
   (add-hook 'web-mode-hook #'electric-indent-local-mode)
   (setq web-mode-enable-auto-closing t
