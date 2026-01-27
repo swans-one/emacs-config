@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: def-list-code
+# key: cdef
+# --
+- ~$1~ :: $2
+$0
