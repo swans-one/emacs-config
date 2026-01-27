@@ -19,7 +19,7 @@
 ;; Append homebrew and local binary locations to exec-path
 (setq exec-path (append exec-path '("/usr/local/bin" "~/.local/bin")))
 
-;; Don't pop up the wanrings buffer for native compilation
+;; Don't pop up the warnings buffer for native compilation
 (setq native-comp-async-report-warnings-errors 'silent)
 
 ;; Aesthetic customizations
@@ -333,7 +333,7 @@ element. Unless you land at the begining of the next element."
  '(ack-executable "/Users/erik/bin/ack")
  '(custom-safe-themes
    '("9494d6d64290602054292f7c1b2db4285b3fea4fbf63b54bdac21aa6f6b0a7e6" "f897f31a459baa86363c91ab0d98d184e41d42fd2c33ec39e72561f25bd8138b" default))
- '(electric-indent-mode nil)
+ '(electric-indent-mode -1)
  '(package-selected-packages
    '(pyim-basedict pyim caddyfile-mode corfu json-mode ace-window nvm eglot neotree pyvenv flycheck rust-mode htmlize use-package gnu-elpa-keyring-update yaml-mode emmet-mode web-mode yasnippet quack paredit magit haskell-mode geiser expand-region dash-functional autopair)))
 (custom-set-faces
