@@ -111,6 +111,16 @@
                '((rust-ts-mode rust-mode) .
                  ("rust-analyzer" :initializationOptions (:check (:command "clippy"))))))
 
+(use-package electric
+  :demand t
+  :hook
+  (yaml-mode . electric-indent-local-mode)
+  (rust-mode . electric-indent-local-mode)
+  (web-mode . electric-indent-local-mode)
+  (python-mode . electric-indent-local-mode)
+  :config
+  (electric-indent-mode -1))
+
 (use-package elec-pair
   :demand t
   :config
@@ -225,9 +235,7 @@
 
 (use-package rust-mode
   :ensure t
-  :mode "\\.rs\\'"
-  :config
-  (add-hook 'rust-mode-hook #'electric-indent-local-mode))
+  :mode "\\.rs\\'")
 
 (use-package show-paren-mode ;; built-in
   :hook (emacs-lisp-mode scheme-mode))
@@ -297,7 +305,6 @@ element. Unless you land at the begining of the next element."
                ("e" . web-mode-element-end)
                ("a" . my-web-mode-element-beginning-2))
   :config
-  (add-hook 'web-mode-hook #'electric-indent-local-mode)
   (setq web-mode-enable-auto-closing t
         web-mode-enable-auto-pairing t
         web-mode-auto-close-style 1
@@ -333,7 +340,6 @@ element. Unless you land at the begining of the next element."
  '(ack-executable "/Users/erik/bin/ack")
  '(custom-safe-themes
    '("9494d6d64290602054292f7c1b2db4285b3fea4fbf63b54bdac21aa6f6b0a7e6" "f897f31a459baa86363c91ab0d98d184e41d42fd2c33ec39e72561f25bd8138b" default))
- '(electric-indent-mode -1)
  '(package-selected-packages
    '(pyim-basedict pyim caddyfile-mode corfu json-mode ace-window nvm eglot neotree pyvenv flycheck rust-mode htmlize use-package gnu-elpa-keyring-update yaml-mode emmet-mode web-mode yasnippet quack paredit magit haskell-mode geiser expand-region dash-functional autopair)))
 (custom-set-faces
