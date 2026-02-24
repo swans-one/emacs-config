@@ -1,0 +1,6 @@
+# key: #each
+# name: svelte-each-loop
+# --
+{#each $1 as $2 ($3)}
+  $0
+{/each}

@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: svelte-if-else
-# key: #ifelse
+# key: #if
 # --
 {#if $1}
   $0

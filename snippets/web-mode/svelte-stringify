@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: svelte-stringify
+# key: json
+# --
+{JSON.stringify($0)}
