@@ -129,6 +129,7 @@
   (rust-mode . electric-indent-local-mode)
   (web-mode . electric-indent-local-mode)
   (python-mode . electric-indent-local-mode)
+  (c-mode . electric-indent-local-mode)
   :config
   (electric-indent-mode -1))
 
