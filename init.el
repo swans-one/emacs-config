@@ -76,6 +76,17 @@
   :config
   (cnfonts-mode 1))
 
+;; Ensure conf-mode is used for quadlet files
+(use-package conf-mode
+  :mode (("pod\\'" . conf-mode)
+         ("container\\'" . conf-mode)
+         ("volume\\'" . conf-mode)
+         ("build\\'" . conf-mode)
+         ("network\\'" . conf-mode)
+         ("image\\'" . conf-mode)
+         ("artifact\\'" . conf-mode)
+         ("kube\\'" . conf-mode)))
+
 (use-package corfu
   :ensure t
   :init
