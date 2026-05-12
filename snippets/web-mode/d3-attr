@@ -1,0 +1,4 @@
+# key: .attr
+# name: d3-attr
+# --
+.attr("$1", ${2:d => $3})$0

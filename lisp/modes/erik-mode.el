@@ -537,8 +537,8 @@ current line"
 (define-key erik-mode-map (kbd "M-L") 'windmove-right)
 
 ;; Movement
-(define-key erik-mode-map (kbd "M-n") 'blank-line-down)
-(define-key erik-mode-map (kbd "M-p") 'blank-line-up)
+(define-key erik-mode-map (kbd "M-N") 'blank-line-down)
+(define-key erik-mode-map (kbd "M-P") 'blank-line-up)
 
 ;; Erik-mode overrides
 ;;
