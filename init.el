@@ -130,6 +130,7 @@
   (web-mode . electric-indent-local-mode)
   (python-mode . electric-indent-local-mode)
   (c-mode . electric-indent-local-mode)
+  (caddyfile-mode . electric-indent-local-mode)
   :config
   (electric-indent-mode -1))
 
