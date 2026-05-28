@@ -1,8 +1,7 @@
 # -*- mode: snippet -*-
 # name: begin
-# key: \begin
-# expand-env: ((yas-indent-line 'fixed))
+# key: begin
 # --
-\begin{$1}
-  $0
-\end{$1}
+#+BEGIN_$1
+$0
+#+END_$1

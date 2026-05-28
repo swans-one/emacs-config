@@ -1,0 +1,9 @@
+# key: ae
+# name: test-assert-equal
+# --
+print("Test: " .. "$1")
+print("Actual: " .. $2)
+print("Expected: " .. $3)
+assert($2 == $3, "$1")
+print("Passed!\n\n")
+$0

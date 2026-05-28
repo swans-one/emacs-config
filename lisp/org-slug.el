@@ -39,6 +39,12 @@
   :type 'boolean
 )
 
+;; TODO: Ensure we're correctly following org-mode's instructions for
+;; adding hyperlink types:
+;; https://orgmode.org/manual/Adding-Hyperlink-Types.html
+
+;; TODO: Update tagging to be based on wiki tagging
+
 
 (defun org-slug-find-file-from-slug (slug &optional root)
   "Find a file containing a slug, SLUG, in a file under directory ROOT."

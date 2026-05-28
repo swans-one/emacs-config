@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: print-table
+# key: pt
+# --
+for k, v in pairs($1) do print(${2:k, v}) end $0
